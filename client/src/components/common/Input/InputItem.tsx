@@ -20,12 +20,11 @@ export default function InputItem({
   className,
   name,
 }: IInputItem) {
-  const v = name ? name : "";
   return (
     <div className='form-floating'>
       <input
-        value={value[v]}
-        onChange={(e) => onChangeEvent(e)}
+        value={value}
+        onChange={(e) => onChangeEvent(e.target.value)}
         type={type}
         className={`form-control + ${className || ""}`}
         id='floatingInput'

@@ -6,6 +6,11 @@ class RemindsService {
     if (!remind) return null;
     return remind;
   }
+  async fetchReminds() {
+    const reminds = await remindsModel.find();
+    if (!remind) return null;
+    return reminds;
+  }
 }
 
 module.exports = new RemindsService();

@@ -22,13 +22,15 @@ export default class AuthService {
     email: string,
     password: string,
     name: string,
-    surname: string
+    surname: string,
+    role: string
   ): Promise<AxiosResponse<IAuthResponse>> {
     return $api.post<IAuthResponse>(`${API_URL}${REGISTRATION_URL}`, {
       email,
       password,
       name,
       surname,
+      role,
     });
   }
   static async loguot(email: string, password: string): Promise<void> {

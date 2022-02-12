@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";  
+import { useSelector } from "react-redux";
 
-const WithAuth = (ProtectedComponent, FallbackComponent) => { // создаю HOC для компонентов которым нажна инфа авт. ли пользователь
-  const isAuth = useSelector((store) => store.userReducer.isAuth); 
-  const redirect = !isAuth;
+const WithAuth = (ProtectedComponent, FallbackComponent) => {
+  // создаю HOC для компонентов которым нужна инфа авт. ли пользователь
+  const isAuth = useSelector((store) => store.userReducer.isAuth);
   return (props) => {
-    if (redirect) {
+    if (!isAuth) {
       return <FallbackComponent />;
     }
     return <ProtectedComponent {...props} />;

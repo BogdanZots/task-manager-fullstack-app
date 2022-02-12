@@ -14,14 +14,16 @@ import {
 } from "../actions/userActions";
 
 function* userRegistation(action) {
-  const { email, password, name, surname } = action.payload;
+  const { email, password, name, surname, role } = action.payload;
+  console.log("data", action.payload);
   try {
     const response = yield call(
       AuthService.registration,
       email,
       password,
       name,
-      surname
+      surname,
+      role
     );
     localStorage.setItem("token", response.data.accessToken);
     yield put({ type: USER_RERISTRATION_SUCCESS });

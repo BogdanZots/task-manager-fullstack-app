@@ -39,6 +39,10 @@ function SideBar(props) {
           title: "Напоминания",
           linkTo: "/reminds",
         },
+        {
+          title: "Страница админа",
+          linkTo: "/admin",
+        },
       ].map((task, index) => (
         <ListItem button key={task.title}>
           <ListItemIcon>

@@ -11,7 +11,7 @@ const {
 } = require("../service/token-service");
 require("dotenv").config;
 class UserService {
-  async registration(email, password, name, surname) {
+  async registration(email, password, name, surname , role) {
     const candidate = await UserModel.findOne({ email });
     if (candidate) {
       throw new Error(`User with ${candidate.email} already exist`);
@@ -25,6 +25,7 @@ class UserService {
       activationLink,
       name,
       surname,
+      role,
     });
     await mailService.sendActivationMail(
       email,

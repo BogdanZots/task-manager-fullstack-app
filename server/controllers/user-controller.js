@@ -5,7 +5,7 @@ const userService = require("../service/user-service");
 class UserController {
   async registration(req, res, next) {
     try {
-      const { email, password, name, surname } = req.body;
+      const { email, password, name, surname , role} = req.body;
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: "Bad request" });
@@ -14,7 +14,8 @@ class UserController {
         email,
         password,
         name,
-        surname
+        surname,
+        role
       );
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 1000,
@@ -52,7 +53,6 @@ class UserController {
   }
 
   async activate(req, res, next) {
-    console.log(req.params);
     try {
       const activationLink = req.params.link;
       await userService.activate(activationLink);
@@ -66,7 +66,6 @@ class UserController {
     try {
       const { refreshToken } = req.cookies;
       const userData = await userService.refresh(refreshToken);
-      console.log(userData);
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
@@ -85,11 +84,9 @@ class UserController {
     }
   }
   async checkAuth(req, res, next) {
-    console.log("req headers", req.headers);
     const accessToken = req.headers.authorization.split(" ")[1];
     try {
       const isAuthhorized = await checkAuth(accessToken);
-      console.log("is auth ? ", isAuthhorized);
       res.cookie("accessToken", accessToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,

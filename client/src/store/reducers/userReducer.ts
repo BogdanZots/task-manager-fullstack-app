@@ -21,6 +21,7 @@ const initialState: IUserStatus = {
     isActivated: false,
     name: "",
     surname: "",
+    role: "",
   },
 };
 

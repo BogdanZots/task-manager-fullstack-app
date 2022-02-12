@@ -16,6 +16,17 @@ class RemindsController {
       next(e);
     }
   }
+  async getReminds(req, res, next) {
+    try {
+      const remindData = await remindsService.createRemind({
+        title,
+        description,
+      });
+      return res.json({ remindData }).status(200);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 module.exports = new RemindsController();
