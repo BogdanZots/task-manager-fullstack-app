@@ -92,13 +92,6 @@ class UserService {
     if (!user) return null;
     return true;
   }
-  async createRemind(data) {
-    const { title, description } = data;
-    console.log("TITLE ETC 2", title, description);
-    const remind = await remindsModel.create({ title, description });
-    if (!remind) return null;
-    return remind;
-  }
 }
 
 module.exports = new UserService();

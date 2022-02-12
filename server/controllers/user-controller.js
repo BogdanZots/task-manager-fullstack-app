@@ -99,17 +99,6 @@ class UserController {
       next(e);
     }
   }
-  async createRemind(req, res, next) {
-    console.log("REA BODY", req.body);
-    const { title, description } = req.body;
-    console.log("TITLE ETC", title, description);
-    try {
-      const remindData = await userService.createRemind({ title, description });
-      return res.json({ remindData }).status(200);
-    } catch (e) {
-      next(e);
-    }
-  }
 }
 
 module.exports = new UserController();
