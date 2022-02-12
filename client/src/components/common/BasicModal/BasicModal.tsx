@@ -37,26 +37,6 @@ export default function BasicModal({ type }: IBasicModalProps) {
   const handleInputTitle = (e: any) => {
     setInputTitle(e);
   };
-  const inputFeilds = [
-    {
-      title: "test-title",
-      description: "test-title",
-      id: 2,
-      isCompleted: false,
-      type: "text",
-      label: "test-label",
-      name: "title",
-    },
-    {
-      title: "test-description",
-      description: "test-description",
-      id: 3,
-      isCompleted: false,
-      type: "text",
-      label: "test-label",
-      name: "description",
-    },
-  ];
 
   //@ts-ignore
   const renderModal = (type: string): JSX.Element => {
@@ -64,7 +44,7 @@ export default function BasicModal({ type }: IBasicModalProps) {
       case "input-modal":
         return (
           <Box sx={style}>
-            <BasicForm type={CREATE_ITEM_FORM} fields={inputFeilds} />
+            <BasicForm type={CREATE_ITEM_FORM} />
           </Box>
         );
       case "text-modal":

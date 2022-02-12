@@ -11,7 +11,7 @@ interface IInputItem {
   id?: string;
   name?: string;
 }
-export default function InputItem({
+export default React.memo(function InputItem({
   type,
   placeholder,
   value,
@@ -20,6 +20,7 @@ export default function InputItem({
   className,
   name,
 }: IInputItem) {
+  console.log("re-render");
   return (
     <div className='form-floating'>
       <input
@@ -34,4 +35,4 @@ export default function InputItem({
       <label htmlFor='floatingInput'>{label}</label>
     </div>
   );
-}
+});

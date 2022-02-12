@@ -11,10 +11,12 @@ import {
   USER_CHECK_AUTH_SUCCESS,
   USER_LOGOUT,
   USER_LOGOUT_SUCCESS,
+  userRegistationSuccess,
 } from "../actions/userActions";
 
 function* userRegistation(action) {
   const { email, password, name, surname, role } = action.payload;
+  let accessToken = "";
   console.log("data", action.payload);
   try {
     const response = yield call(
@@ -25,10 +27,16 @@ function* userRegistation(action) {
       surname,
       role
     );
-    localStorage.setItem("token", response.data.accessToken);
-    yield put({ type: USER_RERISTRATION_SUCCESS });
+    if (response?.data) {
+      accessToken = response.data.accessToken;
+    }
+    console.log("AT", accessToken);
+    localStorage.setItem("token", accessToken);
+    if (response?.data) {
+      yield put(userRegistationSuccess(response.data));
+    }
   } catch (e) {
-    console.log(action, e);
+    console.log(e);
   }
 }
 function* userLogin(action) {

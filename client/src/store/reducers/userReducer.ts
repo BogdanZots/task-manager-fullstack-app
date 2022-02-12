@@ -28,12 +28,11 @@ const initialState: IUserStatus = {
 export default function userReducer(state = initialState, action: any) {
   switch (action.type) {
     case USER_RERISTRATION_SUCCESS: {
-      const { data } = action;
-      console.log("data", data.data.user);
+      const newData = action.payload.user;
       return {
         ...state,
-        isAuth: true,
-        data: { ...data.data.user },
+        isAuth: false,
+        data: { ...newData },
       };
     }
     case USER_LOGIN_SUCCESS: {
