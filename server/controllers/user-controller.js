@@ -5,7 +5,7 @@ const userService = require("../service/user-service");
 class UserController {
   async registration(req, res, next) {
     try {
-      const { email, password, name, surname , role} = req.body;
+      const { email, password, name, surname, role } = req.body;
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: "Bad request" });
@@ -86,12 +86,12 @@ class UserController {
   async checkAuth(req, res, next) {
     const accessToken = req.headers.authorization.split(" ")[1];
     try {
-      const isAuthhorized = await checkAuth(accessToken);
+      const data = await checkAuth(accessToken);
       res.cookie("accessToken", accessToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      return res.json({ isAuthhorized, accessToken }).status(200);
+      return res.json({ ...data, accessToken }).status(200);
     } catch (e) {
       next(e);
     }

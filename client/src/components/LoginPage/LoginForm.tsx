@@ -10,7 +10,7 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <main className='form-signin text-center d-flex justify-content-center mt-5 align-items-center'>
+    <main className='form-signin text-center d-flex justify-content-center mt-5 align-items-center col-12'>
       <form className='col-3'>
         <h1 className='h3 mb-3 fw-normal'>Please sign in</h1>
 

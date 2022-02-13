@@ -11,7 +11,7 @@ const {
 } = require("../service/token-service");
 require("dotenv").config;
 class UserService {
-  async registration(email, password, name, surname , role) {
+  async registration(email, password, name, surname, role) {
     const candidate = await UserModel.findOne({ email });
     if (candidate) {
       throw new Error(`User with ${candidate.email} already exist`);
@@ -91,7 +91,7 @@ class UserService {
     const user = await validateAccessToken(authToken);
     console.log("user", user);
     if (!user) return null;
-    return true;
+    return { user, isAuthorized: true };
   }
 }
 

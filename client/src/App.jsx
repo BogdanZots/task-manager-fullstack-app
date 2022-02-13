@@ -15,6 +15,7 @@ import AdminPage from "./containers/AdminPage/AdminPage";
 import WithAccess from "./HOC/WithAccess";
 import NoAccessPage from "./containers/FallbackPages/NoAccessPage";
 import { roles } from "./const/consts";
+import { Box } from "@mui/material";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,21 +31,23 @@ function App() {
   return (
     <div className='App'>
       <Header />
-      <SideBar />
-      <Routes>
-        <Route path='/home' element={<StartPage testProps='test' />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/registration' element={<RegistrationPage />} />
-        <Route path='/batch' element={<BatchPageWithAuth />} />
-        <Route path='/notes' element={<NotesPageWithAuth />} />
-        <Route path='/reminds' element={<RemindsPageWithAuth />} />
-        <Route
-          path='/admin'
-          element={
-            <AdminsPageWithAccess accessRole={roles.adminRole.ROLE_NAME} />
-          }
-        />
-      </Routes>
+      <Box sx={{ display: "flex" }}>
+        <SideBar />
+        <Routes>
+          <Route path='/home' element={<StartPage testProps='test' />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/registration' element={<RegistrationPage />} />
+          <Route path='/batch' element={<BatchPageWithAuth />} />
+          <Route path='/notes' element={<NotesPageWithAuth />} />
+          <Route path='/reminds' element={<RemindsPageWithAuth />} />
+          <Route
+            path='/admin'
+            element={
+              <AdminsPageWithAccess accessRole={roles.adminRole.ROLE_NAME} />
+            }
+          />
+        </Routes>
+      </Box>
     </div>
   );
 }

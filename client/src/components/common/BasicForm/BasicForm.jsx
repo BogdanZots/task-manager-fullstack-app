@@ -10,7 +10,7 @@ import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
   fields: any[];
 } */
 
-export default function BasicForm({ type } /* : IBasicFormProps */) {
+export default function BasicForm({ type, userId } /* : IBasicFormProps */) {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
@@ -24,7 +24,7 @@ export default function BasicForm({ type } /* : IBasicFormProps */) {
       className: "form-control",
       id: "floatingInput",
       placeholder: "name@example.com",
-      label: "Enter e-mail",
+      label: "Enter title",
     },
     {
       value: description,
@@ -43,6 +43,7 @@ export default function BasicForm({ type } /* : IBasicFormProps */) {
       setRemindsItemRequest({
         title,
         description,
+        userId,
       })
     );
   };

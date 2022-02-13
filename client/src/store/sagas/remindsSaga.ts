@@ -17,11 +17,13 @@ import {
 } from "../actions/remindsAction";
 import UserService from "../../services/UserService";
 
-function* loadReminds() {
+function* loadReminds(action: any) {
+  const id  = action.payload;
+  console.log('PAYLOAD',action.payload)
+  console.log('ID',id)
   try {
     //@ts-ignore
-    const response = yield call(RemindsService.fetchReminds);
-    yield put(loadRemindsRequest());
+    const response = yield call(RemindsService.fetchReminds,`/reminds?userId=${id}`);
     yield put(loadRemindsSuccess(response));
   } catch (e) {
     const error: string = e === "" ? "Unknown error" : "Error is " + e;
@@ -31,11 +33,17 @@ function* loadReminds() {
 }
 
 function* addRemind(action: any) {
-  const { title, description } = action.payload;
-  console.log("data", title);
+  const { title, description, userId } = action.payload;
+  const id = userId;
   try {
     //@ts-ignore
-    const response = yield call(UserService.addItems,'/reminds' ,title, description);
+    const response = yield call(
+      RemindsService.addRemind,
+      "/reminds",
+      title,
+      description,
+      id
+    );
     /*  yield put(setRemindsItemRequest({title,description})); */
     yield put(setRemindsItemSuccess(response));
   } catch (e) {
@@ -46,6 +54,6 @@ function* addRemind(action: any) {
 }
 
 export default function* remindsSaga() {
-  /*   yield takeLatest(LOAD_REMINDS_REQUEST, loadReminds); */
+  yield takeLatest(LOAD_REMINDS_REQUEST, loadReminds);
   yield takeLatest(SET_REMINDS_ITEM, addRemind);
 }

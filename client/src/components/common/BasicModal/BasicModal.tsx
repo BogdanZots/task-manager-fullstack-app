@@ -8,6 +8,7 @@ import { useState } from "react";
 import BasicForm from "../BasicForm/BasicForm";
 import { CREATE_ITEM_FORM } from "../../../const/consts";
 import s from "styled-components";
+import { useSelector } from "react-redux";
 
 const Container = s.div`
 display : inline
@@ -34,6 +35,8 @@ export default function BasicModal({ type }: IBasicModalProps) {
   const [inputTitle, setInputTitle] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  //@ts-ignore
+  const { id } = useSelector((store) => store.user.data);
   const handleInputTitle = (e: any) => {
     setInputTitle(e);
   };
@@ -44,7 +47,7 @@ export default function BasicModal({ type }: IBasicModalProps) {
       case "input-modal":
         return (
           <Box sx={style}>
-            <BasicForm type={CREATE_ITEM_FORM} />
+            <BasicForm type={CREATE_ITEM_FORM} userId={id} />
           </Box>
         );
       case "text-modal":

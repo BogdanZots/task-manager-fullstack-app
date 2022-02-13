@@ -10,11 +10,11 @@ export const SET_REMINDS_ERROR = "SET_REMINDS_ERROR";
 // LOAD
 export interface IloadRemindsRequestAction {
   type: typeof LOAD_REMINDS_REQUEST;
-  payload: boolean;
+  payload: string;
 }
-export const loadRemindsRequest = (): IloadRemindsRequestAction => ({
+export const loadRemindsRequest = (id: string): IloadRemindsRequestAction => ({
   type: LOAD_REMINDS_REQUEST,
-  payload: true,
+  payload: id,
 });
 
 export interface IloadRemindsSuccess {

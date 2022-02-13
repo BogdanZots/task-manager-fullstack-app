@@ -6,7 +6,7 @@ import { rootSaga } from "./sagas/rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 const reducers = combineReducers({
-  userReducer: userReducer,
+  user: userReducer,
   reminds: remindsReducer,
 });
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));

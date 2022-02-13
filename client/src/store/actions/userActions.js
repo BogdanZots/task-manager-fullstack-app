@@ -15,7 +15,6 @@ export const userRegistation = (data) => {
 };
 
 export const userRegistationSuccess = (data) => {
-  console.log("action data", data);
   return {
     type: USER_RERISTRATION_SUCCESS,
     payload: data,

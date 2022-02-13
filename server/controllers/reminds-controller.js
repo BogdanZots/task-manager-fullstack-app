@@ -5,11 +5,12 @@ const userService = require("../service/user-service");
 const remindsService = require("../service/reminds-service");
 class RemindsController {
   async createRemind(req, res, next) {
-    const { title, description } = req.body;
+    const { title, description, id } = req.body;
     try {
       const remindData = await remindsService.createRemind({
         title,
         description,
+        id,
       });
       return res.json({ remindData }).status(200);
     } catch (e) {
@@ -17,11 +18,10 @@ class RemindsController {
     }
   }
   async getReminds(req, res, next) {
+    const id = req.query.userId;
+    console.log(id);
     try {
-      const remindData = await remindsService.createRemind({
-        title,
-        description,
-      });
+      const remindData = await remindsService.fetchReminds(id);
       return res.json({ remindData }).status(200);
     } catch (e) {
       next(e);

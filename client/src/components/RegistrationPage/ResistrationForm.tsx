@@ -87,7 +87,7 @@ const RegistrationForm = () => {
     dispatch(userRegistation({ email, password, name, surName, role }));
   };
   return (
-    <main className='form-signin text-center d-flex justify-content-center'>
+    <main className='form-signin text-center d-flex justify-content-center col-12'>
       <form className='col-6'>
         <h1 className='h3 mb-3 fw-normal'>Please sign up</h1>
         {inputColumns.map((column) => {

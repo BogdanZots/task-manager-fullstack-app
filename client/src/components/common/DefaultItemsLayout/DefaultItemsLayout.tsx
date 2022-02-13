@@ -8,16 +8,28 @@ interface IDefaultItemsLayout {
 }
 export default function DefaultItemsLayout(props: IDefaultItemsLayout) {
   const { items } = props;
+  console.log("items", items);
   return (
-    <Box sx={{ display: "inline" }}>
-      {items.map((item) => {
-        return (
-          <>
-            <div>{item.title}</div>
-            <DefaultCardLayot />
-          </>
-        );
-      })}
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        width: "100%",
+      }}>
+      {items.length >= 1
+        ? items.map((item) => {
+            return (
+              <Box>
+                <DefaultCardLayot
+                  title={item.title}
+                  description={item.description}
+                />
+              </Box>
+            );
+          })
+        : ""}
     </Box>
   );
 }

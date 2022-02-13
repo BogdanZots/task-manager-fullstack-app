@@ -1,9 +1,7 @@
 import {
-  USER_RERISTRATION,
   USER_RERISTRATION_SUCCESS,
   USER_LOGIN_SUCCESS,
   USER_CHECK_AUTH_SUCCESS,
-  USER_LOGOUT,
   USER_LOGOUT_SUCCESS,
 } from "../actions/userActions";
 import { IUser } from "../../models/IUser";
@@ -28,16 +26,13 @@ const initialState: IUserStatus = {
 export default function userReducer(state = initialState, action: any) {
   switch (action.type) {
     case USER_RERISTRATION_SUCCESS: {
-      const newData = action.payload.user;
       return {
         ...state,
         isAuth: false,
-        data: { ...newData },
       };
     }
     case USER_LOGIN_SUCCESS: {
-      const { data } = action;
-      console.log("data", data);
+      const { data } = action.payload;
       return {
         ...state,
         isAuth: true,
@@ -45,16 +40,14 @@ export default function userReducer(state = initialState, action: any) {
       };
     }
     case USER_CHECK_AUTH_SUCCESS: {
-      const { data } = action;
-      console.log("data", action);
+      const { data } = action.payload;
       return {
         ...state,
-        isAuth: true,
-        data: { ...data.data.user },
+        isAuth: data.isAuthorized,
+        data: { ...data.user },
       };
     }
     case USER_LOGOUT_SUCCESS: {
-      console.log(action);
       return {
         ...state,
         isAuth: false,

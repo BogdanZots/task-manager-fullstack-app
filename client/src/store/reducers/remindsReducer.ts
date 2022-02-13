@@ -5,23 +5,25 @@ import {
 } from "../actions/remindsAction";
 import { IReminds } from "../../models/IReminds";
 
-interface IUserStatus {
-  /*   isAuth: boolean; */
+interface IReminsReducer {
   isLoading: boolean;
-  remindsArray: IReminds[];
+  data: IReminds[];
   error: string;
 }
 
-const initialState: IUserStatus = {
-  /*   isAuth: false, */
+const initialState: IReminsReducer = {
   isLoading: false,
-  remindsArray: [],
+  data: [],
   error: "",
 };
 
-export default function remindsReducer(state = initialState, action: any) {
+export default function remindsReducer(
+  state = initialState,
+  action: any
+): IReminsReducer {
   switch (action.type) {
     case LOAD_REMINDS_REQUEST: {
+      console.log("A", action);
       return {
         ...state,
         isLoading: true,
@@ -29,19 +31,21 @@ export default function remindsReducer(state = initialState, action: any) {
     }
     case LOAD_REMINDS_ERROR: {
       const { payload } = action;
+      console.log("A E", action);
       return {
         ...state,
         isLoading: false,
-        remindsArray: [],
+        data: [],
         error: payload,
       };
     }
     case LOAD_REMINDS_SUCCESS: {
-      const { payload } = action;
+      console.log("A S", action);
+      const { data } = action.payload;
       return {
         ...state,
         isLoading: false,
-        remindsArray: payload,
+        data: data.remindData,
       };
     }
     default:

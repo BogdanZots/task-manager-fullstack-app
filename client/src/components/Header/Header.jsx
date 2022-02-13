@@ -68,7 +68,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Header() {
-  const { userReducer } = useSelector((store) => store);
+  const { user } = useSelector((store) => store);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -110,7 +110,7 @@ export default function Header() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}>
-      {!userReducer.isAuth ? (
+      {!user.isAuth ? (
         <MenuItem
           onClick={() => {
             handleMenuClose();
@@ -210,7 +210,7 @@ export default function Header() {
           </Search>
           <Box sx={{ flexGrow: 1 }}></Box>
           <Box>
-            {userReducer.isAuth ? (
+            {user.isAuth ? (
               <StyledButton
                 onClick={() => {
                   dispatch(userLogout());
@@ -233,7 +233,7 @@ export default function Header() {
               </Badge>
             </IconButton>
             <Typography variant='subtitle1' component='div'>
-              {userReducer.data.name ? `Hello , ${userReducer.data.name}` : ""}
+              {user.data.name ? `Hello , ${user.data.name}` : ""}
             </Typography>
             <IconButton
               size='large'
