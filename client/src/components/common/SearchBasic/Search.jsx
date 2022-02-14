@@ -58,7 +58,7 @@ export default function SearchBasic() {
     dispatch(loadRemindsRequest(id, searchField));
   };
 
-  const debouncedCb = useDebounse(handleInputChange, 1000);
+  const debouncedCb = useDebounse(handleInputChange, 400);
 
   const handleDebouncedChange = React.useCallback((e) => {
     debouncedCb(e.target.value);
