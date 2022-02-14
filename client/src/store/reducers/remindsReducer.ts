@@ -2,6 +2,7 @@ import {
   LOAD_REMINDS_REQUEST,
   LOAD_REMINDS_SUCCESS,
   LOAD_REMINDS_ERROR,
+  SET_REMINDS_SUCCESS,
 } from "../actions/remindsAction";
 import { IReminds } from "../../models/IReminds";
 
@@ -23,7 +24,6 @@ export default function remindsReducer(
 ): IReminsReducer {
   switch (action.type) {
     case LOAD_REMINDS_REQUEST: {
-      console.log("A", action);
       return {
         ...state,
         isLoading: true,
@@ -31,7 +31,6 @@ export default function remindsReducer(
     }
     case LOAD_REMINDS_ERROR: {
       const { payload } = action;
-      console.log("A E", action);
       return {
         ...state,
         isLoading: false,
@@ -40,12 +39,21 @@ export default function remindsReducer(
       };
     }
     case LOAD_REMINDS_SUCCESS: {
-      console.log("A S", action);
       const { data } = action.payload;
       return {
         ...state,
         isLoading: false,
         data: data.remindData,
+      };
+    }
+    case SET_REMINDS_SUCCESS: {
+      const dataCopy = [...state.data];
+      dataCopy.push(action.payload.data.remindData);
+      console.log(dataCopy);
+      return {
+        ...state,
+        isLoading: false,
+        data: dataCopy,
       };
     }
     default:

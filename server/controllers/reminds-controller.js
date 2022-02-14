@@ -19,9 +19,9 @@ class RemindsController {
   }
   async getReminds(req, res, next) {
     const id = req.query.userId;
-    console.log(id);
+    const { searchField = "" } = req.query;
     try {
-      const remindData = await remindsService.fetchReminds(id);
+      const remindData = await remindsService.fetchReminds(id, searchField);
       return res.json({ remindData }).status(200);
     } catch (e) {
       next(e);

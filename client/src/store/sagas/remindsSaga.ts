@@ -1,29 +1,24 @@
-import axios from "axios";
 import { takeLatest, call, put } from "redux-saga/effects";
-import { API_URL } from "../../http";
 import RemindsService from "../../services/RemindsService";
-import AuthService from "../../services/RemindsService";
 import {
   LOAD_REMINDS_REQUEST,
-  LOAD_REMINDS_SUCCESS,
-  LOAD_REMINDS_ERROR,
   loadRemindsError,
-  loadRemindsRequest,
   loadRemindsSuccess,
-  setRemindsItemRequest,
   setRemindsItemSuccess,
   setRemindsItemError,
   SET_REMINDS_ITEM,
 } from "../actions/remindsAction";
-import UserService from "../../services/UserService";
 
 function* loadReminds(action: any) {
-  const id  = action.payload;
-  console.log('PAYLOAD',action.payload)
-  console.log('ID',id)
+  const { id, searchField } = action.payload;
+  const concatedSearchField = "&searchField=" + searchField;
+  console.log("ACTION", action.payload);
   try {
     //@ts-ignore
-    const response = yield call(RemindsService.fetchReminds,`/reminds?userId=${id}`);
+    const response = yield call(
+      RemindsService.fetchReminds,
+      `/reminds?userId=${id}${searchField ? concatedSearchField : ""}`
+    );
     yield put(loadRemindsSuccess(response));
   } catch (e) {
     const error: string = e === "" ? "Unknown error" : "Error is " + e;
@@ -44,7 +39,6 @@ function* addRemind(action: any) {
       description,
       id
     );
-    /*  yield put(setRemindsItemRequest({title,description})); */
     yield put(setRemindsItemSuccess(response));
   } catch (e) {
     const error: string = e === "" ? "Unknown error" : "Error is " + e;
