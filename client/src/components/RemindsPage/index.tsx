@@ -12,7 +12,7 @@ display : inline
 }
  */
 export default function Reminds(props: any /* : IRemindsProps */) {
-  const { remindsArray, dispatch } = props;
+  const { remindsArray } = props;
   return (
     <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
       <Box sx={{ display: "flex", alignItems: "center" }}>

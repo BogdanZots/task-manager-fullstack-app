@@ -1,4 +1,5 @@
-export const CREATE_ITEM_FORM = "CREATE_ITEM_FORM";
+export const CREATE_FORM = "CREATE_FORM";
+export const REGISTRATION_FORM = "REGISTRATION_FORM";
 export const API_URL = "/api";
 export const LOGIN_URL = "/login";
 export const LOGOUT_URL = "/logout";

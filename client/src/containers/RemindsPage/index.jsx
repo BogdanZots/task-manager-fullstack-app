@@ -8,7 +8,6 @@ export default function RemindsPage() {
   const dispatch = useDispatch();
   const { reminds } = useSelector((store) => store);
   const { id } = useSelector((store) => store.user.data);
-  console.log("ID", id);
   useEffect(() => {
     dispatch(loadRemindsRequest(id));
   }, []);

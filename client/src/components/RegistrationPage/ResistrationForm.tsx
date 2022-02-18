@@ -8,7 +8,8 @@ import { roles } from "../../const/consts";
 import { SelectChangeEvent } from "@mui/material";
 import { redirect } from "../../helpres/redirect";
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
+  console.log("RE render in registration");
   const [password, setPass] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -19,45 +20,21 @@ const RegistrationForm = () => {
     setRole(e.target.value);
   };
 
-  const dispatch = useDispatch();
-  const inputColumns = [
-    {
-      value: email,
-      onChangeEvent: setEmail,
-      type: "text",
-      className: "form-control",
-      id: "floatingInput",
-      placeholder: "name@example.com",
-      label: "enter your e-mail",
-    },
-    {
-      value: name,
-      onChangeEvent: setName,
-      type: "text",
-      className: "form-control",
-      id: "floatingInput",
-      placeholder: "your first name",
-      label: "your first name",
-    },
-    {
-      value: surName,
-      onChangeEvent: setSurName,
-      type: "text",
-      className: "form-control",
-      id: "floatingInput",
-      placeholder: "your last name",
-      label: "your last name",
-    },
-    {
-      onChangeEvent: setPass,
-      value: password,
-      type: "password",
-      className: "form-control",
-      id: "floatingPassword",
-      placeholder: "Password",
-      label: "Password",
-    },
-  ];
+  const callbacks = [setEmail, setName, setSurName, setPass, setRole];
+  const values = [email, name, surName, password, role];
+  const inputColumnsCopy = inputColumns.map((fieldsObj: any) => ({
+    ...fieldsObj,
+  }));
+  const changedInputColumns = inputColumnsCopy.map(
+    (fieldsObj: any, i: number) => {
+      return {
+        ...fieldsObj,
+        onChangeEvent: callbacks[i],
+        value: values[i],
+      };
+    }
+  );
+  
   const selectColumns = [
     {
       labelId: "demo-simple-select-label",
@@ -78,19 +55,27 @@ const RegistrationForm = () => {
     },
   ];
 
-  const handleFormSubmit = (e: any) => {
-    e.preventDefault();
+  const handleButtonClick = () => {
     setPass("");
     setEmail("");
     setName("");
     setSurName("");
-    dispatch(userRegistation({ email, password, name, surName, role }));
+    setRole("");
+    const handleUserRegistration = getColumnsData({
+      email,
+      password,
+      name,
+      surName,
+      role,
+    });
+    return handleUserRegistration();
   };
+
   return (
     <main className='form-signin text-center d-flex justify-content-center col-12'>
-      <form className='col-6'>
+      <div className='col-6'>
         <h1 className='h3 mb-3 fw-normal'>Please sign up</h1>
-        {inputColumns.map((column) => {
+        {changedInputColumns.map((column: any) => {
           return (
             <InputItem
               onChangeEvent={column.onChangeEvent}
@@ -107,11 +92,10 @@ const RegistrationForm = () => {
         <BasicSelect columns={selectColumns} title='Select person role' />
         <button
           className='w-100 btn btn-lg btn-primary'
-          type='submit'
-          onClick={handleFormSubmit}>
+          onClick={handleButtonClick}>
           Sign up
         </button>
-      </form>
+      </div>
     </main>
   );
 };

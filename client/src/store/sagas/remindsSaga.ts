@@ -12,7 +12,6 @@ import {
 function* loadReminds(action: any) {
   const { id, searchField } = action.payload;
   const concatedSearchField = "&searchField=" + searchField;
-  console.log("ACTION", action.payload);
   try {
     //@ts-ignore
     const response = yield call(
