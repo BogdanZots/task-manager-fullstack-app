@@ -29,6 +29,7 @@ function* loadReminds(action: any) {
 
 function* addRemind(action: any) {
   const { title, description, userId } = action.payload;
+  console.log("ACTION", action.payload);
   const id = userId;
   try {
     //@ts-ignore

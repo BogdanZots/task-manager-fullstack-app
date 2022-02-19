@@ -3,47 +3,42 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userLogin } from "../../store/actions/userActions";
+import InputItem from "../common/Input/InputItem";
+import { loginInputColumns } from "../../config/config";
 // @ts-ignore: Unreachable code error
 const LoginForm = () => {
-  const [password, setPass] = useState("");
-  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let data = {};
+
+  const handleChange = (fieldName: string, newValue: any) => {
+    data = { ...data, [fieldName]: newValue };
+  };
   return (
     <main className='form-signin text-center d-flex justify-content-center mt-5 align-items-center col-12'>
       <form className='col-3'>
         <h1 className='h3 mb-3 fw-normal'>Please sign in</h1>
-
-        <div className='form-floating'>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type='email'
-            className='form-control'
-            id='floatingInput'
-            placeholder='name@example.com'
-          />
-          <label htmlFor='floatingInput'>Email address</label>
-        </div>
-        <div className='form-floating'>
-          <input
-            onChange={(e) => setPass(e.target.value)}
-            value={password}
-            type='password'
-            className='form-control'
-            id='floatingPassword'
-            placeholder='Password'
-          />
-          <label htmlFor='floatingPassword'>Password</label>
-        </div>
+        {loginInputColumns.map((column) => {
+          return (
+            <div className='form-floating'>
+              <InputItem
+                onChangeEvent={handleChange}
+                type={column.type}
+                className={column.className}
+                id={column.id}
+                placeholder={column.placeholder}
+                label={column.label}
+                fieldName={column.fieldName}
+              />
+            </div>
+          );
+        })}
         <button
           className='w-100 btn btn-lg btn-primary'
           type='submit'
           onClick={(e) => {
             e.preventDefault();
-            dispatch(userLogin({ email, password }));
-            setEmail("");
-            setPass("");
+            dispatch(userLogin({ ...data }));
             navigate("/home");
           }}>
           Sign in

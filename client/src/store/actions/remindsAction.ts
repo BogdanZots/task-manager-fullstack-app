@@ -47,7 +47,6 @@ export interface ISetRemindsItemAction {
   payload: any;
 }
 export const setRemindsItemRequest = (data: any): ISetRemindsItemAction => {
-  console.log("HI");
   return {
     type: SET_REMINDS_ITEM,
     payload: data,
