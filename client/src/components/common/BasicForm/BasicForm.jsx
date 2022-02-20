@@ -5,20 +5,32 @@ import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
 import { createItemColumns } from "../../../config/config";
+import { useState, useCallback } from "react";
+import { isEveryFalse } from "../../../helpres/isEveryFalse";
 /* interface IBasicFormProps {
   type: string;
   fields: any[];
 } */
 
+let data = {};
+let isFalse = true;
+
 export default function BasicForm({ type, userId } /* : IBasicFormProps */) {
   const dispatch = useDispatch();
-
-  let data = {};
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  
   const handleChange = (fieldName, newValue) => {
     data = { ...data, [fieldName]: newValue };
+    isFalse = isEveryFalse(data, createItemColumns.length);
+    if (!isFalse) {
+      setButtonDisabled(false);
+    } else if (isFalse) {
+      setButtonDisabled(true);
+    }
   };
 
   const handleSaveItem = () => {
+    console.log(data);
     dispatch(
       setRemindsItemRequest({
         ...data,
@@ -44,7 +56,9 @@ export default function BasicForm({ type, userId } /* : IBasicFormProps */) {
                 />
               );
             })}
-            <Button onClick={handleSaveItem}>Save item</Button>
+            <Button disabled={buttonDisabled} onClick={handleSaveItem}>
+              Save
+            </Button>
           </Box>
         );
       default:
