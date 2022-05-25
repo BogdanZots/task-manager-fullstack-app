@@ -12,7 +12,6 @@ import {
 function* loadReminds(action: any) {
   const { id, searchField } = action.payload;
   const concatedSearchField = "&searchField=" + searchField;
-  console.log("ACTION", action.payload);
   try {
     //@ts-ignore
     const response = yield call(
@@ -29,7 +28,6 @@ function* loadReminds(action: any) {
 
 function* addRemind(action: any) {
   const { title, description, userId } = action.payload;
-  console.log("ACTION", action.payload);
   const id = userId;
   try {
     //@ts-ignore

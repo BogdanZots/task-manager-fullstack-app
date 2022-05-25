@@ -18,8 +18,8 @@ let isFalse = true;
 export default function BasicForm({ type, userId } /* : IBasicFormProps */) {
   const dispatch = useDispatch();
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  
-  const handleChange = (fieldName, newValue) => {
+
+  const handleChange = useCallback((fieldName, newValue) => {
     data = { ...data, [fieldName]: newValue };
     isFalse = isEveryFalse(data, createItemColumns.length);
     if (!isFalse) {
@@ -27,10 +27,11 @@ export default function BasicForm({ type, userId } /* : IBasicFormProps */) {
     } else if (isFalse) {
       setButtonDisabled(true);
     }
-  };
+  }, []);
+
+  console.log(data);
 
   const handleSaveItem = () => {
-    console.log(data);
     dispatch(
       setRemindsItemRequest({
         ...data,

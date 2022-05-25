@@ -7,11 +7,12 @@ import {
   registrationInputColumns,
   selectRoleColumns,
 } from "../../config/config";
+import { IRegistration } from "../../interfaces/userInterface/registrationInterface";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
   //@ts-ignore
-  let data = {};
+  let data : IRegistration = {};
 
   const handleChange = (fieldName: string, newValue: any) => {
     data = { ...data, [fieldName]: newValue };

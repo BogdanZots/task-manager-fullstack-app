@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import { useCallback } from "react";
 
-export const useDebounse = (cb, delay) => {
-  // создаю хук useDebounse
+export const useDebounse = (cb, delay) => {  // создаю хук useDebounse
   const currentRef = useRef(null); // создаю значение по которому буду отслеживать существует ли уже что то в currnet
   const debouncedCb = useCallback(
     (...args) => { // в ...args - все параметры функции которую обернули в useDebounce
@@ -10,7 +9,6 @@ export const useDebounse = (cb, delay) => {
         clearTimeout(currentRef.current);
       }
       currentRef.current = setTimeout(() => { // сетаем таймаут
-        console.log("ARGS", ...args);
         cb(...args);
       }, delay);
     },
