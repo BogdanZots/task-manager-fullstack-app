@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import React from "react";
 import DefaultCardLayot from "../DefaultCardLayout/DefaultCardLayout";
-import { IReminds } from "../../../models/IReminds";
 
 interface IDefaultItemsLayout {
   items: Array<any>;

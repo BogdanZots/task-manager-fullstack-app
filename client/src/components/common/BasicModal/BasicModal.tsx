@@ -9,6 +9,7 @@ import BasicForm from "../BasicForm/BasicForm";
 import { CREATE_FORM } from "../../../const/consts";
 import s from "styled-components";
 import { useSelector } from "react-redux";
+import { getUserId } from "../../../store/selectors/userSelector";
 
 const Container = s.div`
 display : inline
@@ -41,7 +42,15 @@ export default function BasicModal({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //@ts-ignore
+<<<<<<< HEAD
+  const id = useSelector(getUserId);
+  
+  const handleInputTitle = (e: any) => {
+    setInputTitle(e);
+  };
+=======
   const { id } = useSelector((store) => store.user.data);
+>>>>>>> develop
 
   //@ts-ignore
   const renderModal = (type: string): JSX.Element => {
@@ -60,10 +69,10 @@ export default function BasicModal({
       case "text-modal":
         return (
           <Box sx={style}>
-            <Typography id='modal-modal-title' variant='h6' component='h2'>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
               Text in a modal
             </Typography>
-            <Typography id='modal-modal-description' sx={{ mt: 2 }}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </Typography>
           </Box>
@@ -85,8 +94,9 @@ export default function BasicModal({
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'>
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
         {renderModal(type)}
       </Modal>
     </Container>

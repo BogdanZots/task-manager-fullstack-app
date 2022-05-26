@@ -4,12 +4,24 @@ import userReducer from "./reducers/userReducer";
 import remindsReducer from "./reducers/remindsReducer";
 import { rootSaga } from "./sagas/rootSaga";
 
+const testMiddleware = (store) => {
+  return function (next) {
+    return function (action) {
+      console.log(store, next, action);
+      next(action);
+    };
+  };
+};
+
 const sagaMiddleware = createSagaMiddleware();
 const reducers = combineReducers({
   user: userReducer,
   reminds: remindsReducer,
 });
-const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+const store = createStore(
+  reducers,
+  applyMiddleware(testMiddleware, sagaMiddleware)
+);
 sagaMiddleware.run(rootSaga);
 window.store = store;
 export default store;

@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useDebounse } from "../../../hooks/useDebounse";
 import { loadRemindsRequest } from "../../../store/actions/remindsAction";
 import { useDispatch, useSelector } from "react-redux";
+import { getUserId } from "../../../store/selectors/userSelector";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -50,7 +51,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchBasic() {
   const dispatch = useDispatch();
+<<<<<<< HEAD
+  const id = useSelector(getUserId);
+  console.log(id);
+=======
   const { id } = useSelector((store) => store.user.data);
+>>>>>>> develop
   const handleInputChange = (searchField) => {
     dispatch(loadRemindsRequest(id, searchField));
   };
@@ -66,7 +72,7 @@ export default function SearchBasic() {
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder='Search…'
+          placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
           onChange={handleDebouncedChange}
         />

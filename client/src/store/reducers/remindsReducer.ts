@@ -47,13 +47,10 @@ export default function remindsReducer(
       };
     }
     case SET_REMINDS_SUCCESS: {
-      const dataCopy = [...state.data];
-      dataCopy.push(action.payload.data.remindData);
-      console.log(dataCopy);
       return {
         ...state,
         isLoading: false,
-        data: dataCopy,
+        data: [...state.data, action.payload.data.remindData],
       };
     }
     default:

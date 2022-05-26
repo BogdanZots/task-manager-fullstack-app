@@ -19,6 +19,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogout } from "../../store/actions/userActions";
 import { Button } from "@mui/material";
+import {
+  getUserAuthState,
+  getUserData,
+} from "../../store/selectors/userSelector";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,12 +71,15 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function Header() {
-  const { user } = useSelector((store) => store);
+export default function Header({ name }) {
+  const user = useSelector(getUserData);
+  const isAuth = useSelector(getUserAuthState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  console.log(user);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -109,13 +116,15 @@ export default function Header() {
         horizontal: "right",
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}>
-      {!user.isAuth ? (
+      onClose={handleMenuClose}
+    >
+      {isAuth ? (
         <MenuItem
           onClick={() => {
             handleMenuClose();
             navigate("/login");
-          }}>
+          }}
+        >
           Sign in
         </MenuItem>
       ) : (
@@ -125,7 +134,8 @@ export default function Header() {
         onClick={() => {
           handleMenuClose();
           navigate("/registration");
-        }}>
+        }}
+      >
         Sign up
       </MenuItem>
     </Menu>
@@ -146,10 +156,11 @@ export default function Header() {
         horizontal: "right",
       }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}>
+      onClose={handleMobileMenuClose}
+    >
       <MenuItem>
-        <IconButton size='large' aria-label='show 4 new mails' color='inherit'>
-          <Badge badgeContent={4} color='error'>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -157,10 +168,11 @@ export default function Header() {
       </MenuItem>
       <MenuItem>
         <IconButton
-          size='large'
-          aria-label='show 17 new notifications'
-          color='inherit'>
-          <Badge badgeContent={17} color='error'>
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -168,11 +180,12 @@ export default function Header() {
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
-          size='large'
-          aria-label='account of current user'
-          aria-controls='primary-search-account-menu'
-          aria-haspopup='true'
-          color='inherit'>
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -182,21 +195,23 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+      <AppBar position="static">
         <Toolbar>
           <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='open drawer'
-            sx={{ mr: 2 }}>
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
             <MenuIcon />
           </IconButton>
           <Typography
-            variant='h6'
+            variant="h6"
             noWrap
-            component='div'
-            sx={{ display: { xs: "none", sm: "block" } }}>
+            component="div"
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >
             MUI
           </Typography>
           <Search>
@@ -204,18 +219,19 @@ export default function Header() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder='Search…'
+              placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }}></Box>
           <Box>
-            {user.isAuth ? (
+            {isAuth ? (
               <StyledButton
                 onClick={() => {
                   dispatch(userLogout());
                   navigate("/login");
-                }}>
+                }}
+              >
                 Logout
               </StyledButton>
             ) : (
@@ -223,37 +239,41 @@ export default function Header() {
             )}
           </Box>
           <Box
-            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}>
+            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
+          >
             <IconButton
-              size='large'
-              aria-label='show 17 new notifications'
-              color='inherit'>
-              <Badge badgeContent={17} color='error'>
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <Typography variant='subtitle1' component='div'>
-              {user.data.name ? `Hello , ${user.data.name}` : ""}
+            <Typography variant="subtitle1" component="div">
+              {name ? `Hello , ${name}` : ""}
             </Typography>
             <IconButton
-              size='large'
-              edge='end'
-              aria-label='account of current user'
+              size="large"
+              edge="end"
+              aria-label="account of current user"
               aria-controls={menuId}
-              aria-haspopup='true'
+              aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color='inherit'>
+              color="inherit"
+            >
               <AccountCircle />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
-              size='large'
-              aria-label='show more'
+              size="large"
+              aria-label="show more"
               aria-controls={mobileMenuId}
-              aria-haspopup='true'
+              aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color='inherit'>
+              color="inherit"
+            >
               <MoreIcon />
             </IconButton>
           </Box>

@@ -26,8 +26,9 @@ export default function Reminds(props: any /* : IRemindsProps */) {
           flexWrap: "wrap",
           justifyContent: "space-between",
           width: "100%",
-        }}>
-        <DefaultItemsLayout items={remindsArray.data} />
+        }}
+      >
+        <DefaultItemsLayout items={remindsArray} />
       </Box>
     </Box>
   );

@@ -10,6 +10,7 @@ const BatchSchema = new Schema({
   status: { type: Boolean },
   userId: { type: Number, required: true },
 });
+
 const batch = model("Batch", BatchSchema);
 new batch({ title: "title" }).save((err) => {
   // через new batch() - создаём document
