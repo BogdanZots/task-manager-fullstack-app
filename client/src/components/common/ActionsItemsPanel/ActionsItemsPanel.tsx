@@ -16,8 +16,9 @@ export default function ActionsItemsPanel() {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <BasicModal
+        //@ts-ignore
         getColumnsData={onButtonClick}
-        type='input-modal'
+        type="input-modal"
         inputColumns={addItemForm}
       />
       <SearchBasic />

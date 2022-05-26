@@ -26,7 +26,6 @@ const initialState: IUserStatus = {
 };
 
 export default function userReducer(state = initialState, action: any) {
-  console.log("REDUCER");
   switch (action.type) {
     case USER_RERISTRATION_SUCCESS: {
       console.log(action);

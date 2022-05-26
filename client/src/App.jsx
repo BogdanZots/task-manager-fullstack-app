@@ -16,7 +16,7 @@ import WithAccess from "./HOC/WithAccess";
 import NoAccessPage from "./containers/FallbackPages/NoAccessPage";
 import { roles } from "./const/consts";
 import { Box } from "@mui/material";
-import { getUserData } from "./store/selectors/userSelector";
+import { getUser } from "./store/selectors/userSelector";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,8 @@ function App() {
     }
   }, []);
 
-  const user = useSelector(getUserData);
+  const { data } = useSelector(getUser);
+  const user = data;
   const NotesPageWithAuth = WithAuth(NotesPage, LoginPage);
   const BatchPageWithAuth = WithAuth(BatchPage, LoginPage);
   const RemindsPageWithAuth = WithAuth(RemindsPage, LoginPage);
