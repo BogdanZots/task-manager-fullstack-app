@@ -37,7 +37,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -52,20 +51,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchBasic() {
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const id = useSelector(getUserId);
   console.log(id);
+=======
+  const { id } = useSelector((store) => store.user.data);
+>>>>>>> develop
   const handleInputChange = (searchField) => {
-    console.log("searchField", searchField);
     dispatch(loadRemindsRequest(id, searchField));
   };
-
   const debouncedCb = useDebounse(handleInputChange, 400);
-
   const handleDebouncedChange = React.useCallback((e) => {
     debouncedCb(e.target.value);
   }, []);
-
-  console.log("rerender");
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Search>

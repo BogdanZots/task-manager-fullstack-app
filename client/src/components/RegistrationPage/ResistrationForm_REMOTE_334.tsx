@@ -1,28 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userRegistation } from "../../store/actions/userActions";
 import InputItem from "../common/Input/InputItem";
 import BasicSelect from "../Select/Select";
-import {
-  registrationInputColumns,
-  selectRoleColumns,
-} from "../../config/config";
-import { IRegistration } from "../../interfaces/userInterface/registrationInterface";
+import { roles } from "../../const/consts";
+import { SelectChangeEvent } from "@mui/material";
+import { redirect } from "../../helpres/redirect";
 
-<<<<<<< HEAD
-const RegistrationForm = () => {
-  const dispatch = useDispatch();
-  //@ts-ignore
-  let data : IRegistration = {};
-
-  const handleChange = (fieldName: string, newValue: any) => {
-    data = { ...data, [fieldName]: newValue };
-  };
-
-  const handleFormSubmit = (e: any) => {
-    e.preventDefault();
-    dispatch(userRegistation({ ...data }));
-=======
 const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
   console.log("RE render in registration");
   const [password, setPass] = useState("");
@@ -84,36 +69,27 @@ const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
       role,
     });
     return handleUserRegistration();
->>>>>>> develop
   };
 
   return (
     <main className='form-signin text-center d-flex justify-content-center col-12'>
       <div className='col-6'>
         <h1 className='h3 mb-3 fw-normal'>Please sign up</h1>
-<<<<<<< HEAD
-        {registrationInputColumns.map((column) => {
-=======
         {changedInputColumns.map((column: any) => {
->>>>>>> develop
           return (
             <InputItem
-              onChangeEvent={handleChange}
+              onChangeEvent={column.onChangeEvent}
+              value={column.value}
               type={column.type}
               className={column.className}
               id={column.id}
               placeholder={column.placeholder}
               label={column.label}
-              fieldName={column.fieldName}
             />
           );
         })}
 
-        <BasicSelect
-          onChangeEvent={handleChange}
-          columns={selectRoleColumns}
-          title='Select person role'
-        />
+        <BasicSelect columns={selectColumns} title='Select person role' />
         <button
           className='w-100 btn btn-lg btn-primary'
           onClick={handleButtonClick}>

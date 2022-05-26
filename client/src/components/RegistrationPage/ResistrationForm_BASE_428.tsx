@@ -1,30 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userRegistation } from "../../store/actions/userActions";
 import InputItem from "../common/Input/InputItem";
 import BasicSelect from "../Select/Select";
-import {
-  registrationInputColumns,
-  selectRoleColumns,
-} from "../../config/config";
-import { IRegistration } from "../../interfaces/userInterface/registrationInterface";
+import { roles } from "../../const/consts";
+import { SelectChangeEvent } from "@mui/material";
+import { redirect } from "../../helpres/redirect";
 
-<<<<<<< HEAD
 const RegistrationForm = () => {
-  const dispatch = useDispatch();
-  //@ts-ignore
-  let data : IRegistration = {};
-
-  const handleChange = (fieldName: string, newValue: any) => {
-    data = { ...data, [fieldName]: newValue };
-  };
-
-  const handleFormSubmit = (e: any) => {
-    e.preventDefault();
-    dispatch(userRegistation({ ...data }));
-=======
-const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
-  console.log("RE render in registration");
   const [password, setPass] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -35,21 +19,45 @@ const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
     setRole(e.target.value);
   };
 
-  const callbacks = [setEmail, setName, setSurName, setPass, setRole];
-  const values = [email, name, surName, password, role];
-  const inputColumnsCopy = inputColumns.map((fieldsObj: any) => ({
-    ...fieldsObj,
-  }));
-  const changedInputColumns = inputColumnsCopy.map(
-    (fieldsObj: any, i: number) => {
-      return {
-        ...fieldsObj,
-        onChangeEvent: callbacks[i],
-        value: values[i],
-      };
-    }
-  );
-  
+  const dispatch = useDispatch();
+  const inputColumns = [
+    {
+      value: email,
+      onChangeEvent: setEmail,
+      type: "text",
+      className: "form-control",
+      id: "floatingInput",
+      placeholder: "name@example.com",
+      label: "enter your e-mail",
+    },
+    {
+      value: name,
+      onChangeEvent: setName,
+      type: "text",
+      className: "form-control",
+      id: "floatingInput",
+      placeholder: "your first name",
+      label: "your first name",
+    },
+    {
+      value: surName,
+      onChangeEvent: setSurName,
+      type: "text",
+      className: "form-control",
+      id: "floatingInput",
+      placeholder: "your last name",
+      label: "your last name",
+    },
+    {
+      onChangeEvent: setPass,
+      value: password,
+      type: "password",
+      className: "form-control",
+      id: "floatingPassword",
+      placeholder: "Password",
+      label: "Password",
+    },
+  ];
   const selectColumns = [
     {
       labelId: "demo-simple-select-label",
@@ -70,56 +78,40 @@ const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
     },
   ];
 
-  const handleButtonClick = () => {
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
     setPass("");
     setEmail("");
     setName("");
     setSurName("");
-    setRole("");
-    const handleUserRegistration = getColumnsData({
-      email,
-      password,
-      name,
-      surName,
-      role,
-    });
-    return handleUserRegistration();
->>>>>>> develop
+    dispatch(userRegistation({ email, password, name, surName, role }));
   };
-
   return (
     <main className='form-signin text-center d-flex justify-content-center col-12'>
-      <div className='col-6'>
+      <form className='col-6'>
         <h1 className='h3 mb-3 fw-normal'>Please sign up</h1>
-<<<<<<< HEAD
-        {registrationInputColumns.map((column) => {
-=======
-        {changedInputColumns.map((column: any) => {
->>>>>>> develop
+        {inputColumns.map((column) => {
           return (
             <InputItem
-              onChangeEvent={handleChange}
+              onChangeEvent={column.onChangeEvent}
+              value={column.value}
               type={column.type}
               className={column.className}
               id={column.id}
               placeholder={column.placeholder}
               label={column.label}
-              fieldName={column.fieldName}
             />
           );
         })}
 
-        <BasicSelect
-          onChangeEvent={handleChange}
-          columns={selectRoleColumns}
-          title='Select person role'
-        />
+        <BasicSelect columns={selectColumns} title='Select person role' />
         <button
           className='w-100 btn btn-lg btn-primary'
-          onClick={handleButtonClick}>
+          type='submit'
+          onClick={handleFormSubmit}>
           Sign up
         </button>
-      </div>
+      </form>
     </main>
   );
 };

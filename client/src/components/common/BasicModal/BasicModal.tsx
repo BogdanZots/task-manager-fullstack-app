@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import InputItem from "../Input/InputItem";
 import { useState } from "react";
 import BasicForm from "../BasicForm/BasicForm";
-import { CREATE_ITEM_FORM } from "../../../const/consts";
+import { CREATE_FORM } from "../../../const/consts";
 import s from "styled-components";
 import { useSelector } from "react-redux";
 import { getUserId } from "../../../store/selectors/userSelector";
@@ -29,19 +29,28 @@ const style = {
 
 interface IBasicModalProps {
   type: string;
+  getColumnsData: any;
+  inputColumns: any;
 }
 
-export default function BasicModal({ type }: IBasicModalProps) {
+export default function BasicModal({
+  type,
+  getColumnsData,
+  inputColumns,
+}: IBasicModalProps) {
   const [open, setOpen] = useState(false);
-  const [inputTitle, setInputTitle] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //@ts-ignore
+<<<<<<< HEAD
   const id = useSelector(getUserId);
   
   const handleInputTitle = (e: any) => {
     setInputTitle(e);
   };
+=======
+  const { id } = useSelector((store) => store.user.data);
+>>>>>>> develop
 
   //@ts-ignore
   const renderModal = (type: string): JSX.Element => {
@@ -49,7 +58,12 @@ export default function BasicModal({ type }: IBasicModalProps) {
       case "input-modal":
         return (
           <Box sx={style}>
-            <BasicForm type={CREATE_ITEM_FORM} userId={id} />
+            <BasicForm
+              type={CREATE_FORM}
+              userId={id}
+              getColumnsData={getColumnsData}
+              inputColumns={inputColumns}
+            />
           </Box>
         );
       case "text-modal":
@@ -70,7 +84,13 @@ export default function BasicModal({ type }: IBasicModalProps) {
 
   return (
     <Container>
-      <Button onClick={handleOpen}>Create Item</Button>
+      <Button
+        onClick={() => {
+          handleOpen();
+          /*  debugger; */
+        }}>
+        Create Item
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

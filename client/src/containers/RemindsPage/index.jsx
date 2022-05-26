@@ -8,9 +8,14 @@ import { getReminds } from "../../store/selectors/remindsSelector";
 
 export default function RemindsPage() {
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const reminds = useSelector(getReminds);
   const id = useSelector(getUserId);
   
+=======
+  const { reminds } = useSelector((store) => store);
+  const { id } = useSelector((store) => store.user.data);
+>>>>>>> develop
   useEffect(() => {
     dispatch(loadRemindsRequest(id));
   }, []);
