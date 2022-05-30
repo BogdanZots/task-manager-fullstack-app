@@ -1,4 +1,4 @@
-export const isEveryFalse = (data, dataLength) => {
+export const isItemEmpty = (data, dataLength) => {
   const arrFromObj = Object.values(data);
   const checkEveryValue = () => {
     return arrFromObj.every((item) => item !== "");
