@@ -5,11 +5,11 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import InputItem from "../Input/InputItem";
 import { useState } from "react";
-import BasicForm from "../BasicForm/BasicForm";
+import BasicForm from "../Forms/BasicForm/BasicForm";
 import { CREATE_FORM } from "../../../const/consts";
 import s from "styled-components";
 import { useSelector } from "react-redux";
-import { getUserId } from "../../../store/selectors/userSelector";
+import { getUser, getUserId } from "../../../store/selectors/userSelector";
 
 const Container = s.div`
 display : inline
@@ -39,18 +39,17 @@ export default function BasicModal({
   inputColumns,
 }: IBasicModalProps) {
   const [open, setOpen] = useState(false);
+  const [inputTitle, setInputTitle] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //@ts-ignore
-<<<<<<< HEAD
-  const id = useSelector(getUserId);
-  
+  const {
+    data: { id },
+  } = useSelector(getUser);
+
   const handleInputTitle = (e: any) => {
     setInputTitle(e);
   };
-=======
-  const { id } = useSelector((store) => store.user.data);
->>>>>>> develop
 
   //@ts-ignore
   const renderModal = (type: string): JSX.Element => {
@@ -61,6 +60,7 @@ export default function BasicModal({
             <BasicForm
               type={CREATE_FORM}
               userId={id}
+              //@ts-ignore
               getColumnsData={getColumnsData}
               inputColumns={inputColumns}
             />
@@ -87,8 +87,8 @@ export default function BasicModal({
       <Button
         onClick={() => {
           handleOpen();
-          /*  debugger; */
-        }}>
+        }}
+      >
         Create Item
       </Button>
       <Modal

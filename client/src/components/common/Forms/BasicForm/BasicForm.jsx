@@ -1,25 +1,22 @@
-<<<<<<< HEAD
-import { CREATE_ITEM_FORM } from "../../../const/consts";
+import { CREATE_ITEM_FORM, REGISTRATION_FORM } from "../../../const/consts";
 import InputItem from "../Input/InputItem";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
-import { createItemColumns } from "../../../config/config";
+import {
+  createItemColumns,
+  registrationInputColumns,
+} from "../../../config/config";
 import { useState, useCallback } from "react";
 import { isEveryFalse } from "../../../helpres/isEveryFalse";
-=======
-import { CREATE_FORM, REGISTRATION_FORM } from "../../../const/consts";
-import Box from "@mui/material/Box";
-import CreateItemForm from "./Forms/CreateItemForm";
-import RegistrationForm from "../../RegistrationPage/ResistrationForm";
->>>>>>> develop
+import RegistrationPage from "../../../containers/RegistrationPage/RegistrationPage";
+
 /* interface IBasicFormProps {
   type: string;
   fields: any[];
 } */
 
-<<<<<<< HEAD
 let data = {};
 let isFalse = true;
 
@@ -46,25 +43,12 @@ export default function BasicForm({ type, userId } /* : IBasicFormProps */) {
         userId,
       })
     );
-=======
-export default function BasicForm(
-  { type, userId, getColumnsData, inputColumns } /* : IBasicFormProps */
-) {
-  console.log("re render");
-
-  const handleButtonClick = /* React.useCallback( */ (data) => {
-    console.log("ALARM", data);
-    return () => {
-      return getColumnsData(data);
-    };
->>>>>>> develop
   };
-  /*  }, []) */ //@ts-ignore
+  //@ts-ignore
   const renderBasicForm = (type /* : string */) /* : JSX.Element */ => {
     switch (type) {
-      case CREATE_FORM:
+      case CREATE_ITEM_FORM:
         return (
-<<<<<<< HEAD
           <Box>
             {createItemColumns.map((column /* : any */, i) => {
               return (
@@ -82,28 +66,13 @@ export default function BasicForm(
               Save
             </Button>
           </Box>
-=======
-          <CreateItemForm
-            getColumnsData={handleButtonClick}
-            inputColumns={inputColumns}
-            userId={userId}
-          />
         );
-      case REGISTRATION_FORM:
-        return (
-          <RegistrationForm
-            inputColumns={inputColumns}
-            getColumnsData={handleButtonClick}
-            userId={userId}
-          />
->>>>>>> develop
-        );
+      case REGISTRATION_FORM: {
+        return <RegistrationPage />;
+      }
       default:
         <div>There is no data to display</div>;
     }
   };
-
-  return (
-    <Box sx={{ display: "flex", width: "100%" }}>{renderBasicForm(type)}</Box>
-  );
+  return <div>{renderBasicForm(type)}</div>;
 }

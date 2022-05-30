@@ -3,19 +3,18 @@ import { Box } from "@mui/material";
 import Reminds from "../../components/RemindsPage";
 import { useSelector, useDispatch } from "react-redux";
 import { loadRemindsRequest } from "../../store/actions/remindsAction";
-import { getUserId } from "../../store/selectors/userSelector";
+import { getUser, getUserId } from "../../store/selectors/userSelector";
 import { getReminds } from "../../store/selectors/remindsSelector";
 
 export default function RemindsPage() {
   const dispatch = useDispatch();
-<<<<<<< HEAD
   const reminds = useSelector(getReminds);
-  const id = useSelector(getUserId);
-  
-=======
-  const { reminds } = useSelector((store) => store);
-  const { id } = useSelector((store) => store.user.data);
->>>>>>> develop
+  const {
+    data: { id },
+  } = useSelector(getUser);
+
+  console.log("ID ? ", id);
+
   useEffect(() => {
     dispatch(loadRemindsRequest(id));
   }, []);

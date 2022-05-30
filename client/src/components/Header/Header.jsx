@@ -19,10 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogout } from "../../store/actions/userActions";
 import { Button } from "@mui/material";
-import {
-  getUserAuthState,
-  getUserData,
-} from "../../store/selectors/userSelector";
+import { getUser } from "../../store/selectors/userSelector";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -72,8 +69,8 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Header({ name }) {
-  const user = useSelector(getUserData);
-  const isAuth = useSelector(getUserAuthState);
+  const { data, isAuth } = useSelector(getUser);
+  const user = data;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -118,7 +115,7 @@ export default function Header({ name }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {isAuth ? (
+      {!isAuth ? (
         <MenuItem
           onClick={() => {
             handleMenuClose();

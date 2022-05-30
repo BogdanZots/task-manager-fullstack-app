@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userRegistation } from "../../store/actions/userActions";
 import InputItem from "../common/Input/InputItem";
@@ -8,12 +9,13 @@ import {
   selectRoleColumns,
 } from "../../config/config";
 import { IRegistration } from "../../interfaces/userInterface/registrationInterface";
+import { roles } from "../../const/consts";
+import { SelectChangeEvent } from "@mui/material";
 
-<<<<<<< HEAD
-const RegistrationForm = () => {
+const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
   const dispatch = useDispatch();
   //@ts-ignore
-  let data : IRegistration = {};
+  let data: IRegistration = {};
 
   const handleChange = (fieldName: string, newValue: any) => {
     data = { ...data, [fieldName]: newValue };
@@ -22,8 +24,7 @@ const RegistrationForm = () => {
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
     dispatch(userRegistation({ ...data }));
-=======
-const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
+  };
   console.log("RE render in registration");
   const [password, setPass] = useState("");
   const [email, setEmail] = useState("");
@@ -49,7 +50,7 @@ const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
       };
     }
   );
-  
+
   const selectColumns = [
     {
       labelId: "demo-simple-select-label",
@@ -84,18 +85,12 @@ const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
       role,
     });
     return handleUserRegistration();
->>>>>>> develop
   };
-
   return (
-    <main className='form-signin text-center d-flex justify-content-center col-12'>
-      <div className='col-6'>
-        <h1 className='h3 mb-3 fw-normal'>Please sign up</h1>
-<<<<<<< HEAD
+    <main className="form-signin text-center d-flex justify-content-center col-12">
+      <form className="col-6">
+        <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
         {registrationInputColumns.map((column) => {
-=======
-        {changedInputColumns.map((column: any) => {
->>>>>>> develop
           return (
             <InputItem
               onChangeEvent={handleChange}
@@ -112,14 +107,16 @@ const RegistrationForm = ({ inputColumns, getColumnsData, userId }: any) => {
         <BasicSelect
           onChangeEvent={handleChange}
           columns={selectRoleColumns}
-          title='Select person role'
+          title="Select person role"
         />
         <button
-          className='w-100 btn btn-lg btn-primary'
-          onClick={handleButtonClick}>
+          className="w-100 btn btn-lg btn-primary"
+          type="submit"
+          onClick={handleFormSubmit}
+        >
           Sign up
         </button>
-      </div>
+      </form>
     </main>
   );
 };

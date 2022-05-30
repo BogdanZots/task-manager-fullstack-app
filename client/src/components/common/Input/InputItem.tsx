@@ -25,17 +25,17 @@ export default React.memo(function InputItem({
     onChangeEvent(fieldName, newValue);
   };
   return (
-    <div className='form-floating'>
+    <div className="form-floating">
       <input
         value={value}
         onChange={(e) => handleChange(e.target.value)}
         type={type}
         className={`form-control + ${className || ""}`}
-        id='floatingInput'
+        id="floatingInput"
         placeholder={placeholder}
         name={name}
       />
-      <label htmlFor='floatingInput'>{label}</label>
+      <label htmlFor="floatingInput">{label}</label>
     </div>
   );
 });
