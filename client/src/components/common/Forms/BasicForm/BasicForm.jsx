@@ -1,74 +1,54 @@
-import { CREATE_ITEM_FORM, REGISTRATION_FORM } from "../../../const/consts";
-import InputItem from "../Input/InputItem";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
-import {
-  createItemColumns,
-  registrationInputColumns,
-} from "../../../config/config";
-import { useState, useCallback } from "react";
-import { isEveryFalse } from "../../../helpres/isEveryFalse";
-import RegistrationPage from "../../../containers/RegistrationPage/RegistrationPage";
+import { setRemindsItemRequest } from "../../../../store/actions/remindsAction";
+import { CREATE_ITEM_FORM, REGISTRATION_FORM } from "../../../../const/consts";
+import { configsLength, createItemColumns } from "../../../../config/config";
+import { isItemEmpty } from "../../../../helpres/isItemEmpty";
+import { CreateItemForm } from "./Forms/CustoForms/CreateItemForm";
 
-/* interface IBasicFormProps {
-  type: string;
-  fields: any[];
-} */
-
-let data = {};
-let isFalse = true;
-
-export default function BasicForm({ type, userId } /* : IBasicFormProps */) {
+export default function BasicForm({ type, userId }) {
   const dispatch = useDispatch();
+  const [fields, setFields] = useState({});
+  const [isFieldsEmpty, setIsEmpty] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
-  const handleChange = useCallback((fieldName, newValue) => {
-    data = { ...data, [fieldName]: newValue };
-    isFalse = isEveryFalse(data, createItemColumns.length);
-    if (!isFalse) {
-      setButtonDisabled(false);
-    } else if (isFalse) {
-      setButtonDisabled(true);
-    }
-  }, []);
-
-  console.log(data);
+  const handleConfigUpdate = (fieldName, newValue) => {
+    setFields((prevFields) => ({
+      ...prevFields,
+      [fieldName]: newValue,
+    }));
+  };
 
   const handleSaveItem = () => {
     dispatch(
       setRemindsItemRequest({
-        ...data,
+        ...fields,
         userId,
       })
     );
   };
-  //@ts-ignore
-  const renderBasicForm = (type /* : string */) /* : JSX.Element */ => {
+
+  useEffect(() => {
+    setIsEmpty(isItemEmpty(fields, configsLength[type]));
+    if (!isFieldsEmpty) {
+      setButtonDisabled(false);
+    } else if (isFieldsEmpty) {
+      setButtonDisabled(true);
+    }
+  }, [fields, isFieldsEmpty]);
+
+  const renderBasicForm = (type) => {
     switch (type) {
       case CREATE_ITEM_FORM:
         return (
-          <Box>
-            {createItemColumns.map((column /* : any */, i) => {
-              return (
-                <InputItem
-                  type={column.type}
-                  placeholder={column.description}
-                  onChangeEvent={handleChange}
-                  label={column.label}
-                  name={column.name}
-                  fieldName={column.fieldName}
-                />
-              );
-            })}
-            <Button disabled={buttonDisabled} onClick={handleSaveItem}>
-              Save
-            </Button>
-          </Box>
+          <CreateItemForm
+            onChange={handleConfigUpdate}
+            onButtonClick={handleSaveItem}
+            isButtonDisabled={buttonDisabled}
+          />
         );
       case REGISTRATION_FORM: {
-        return <RegistrationPage />;
+        return <div>Reg Form </div>;
       }
       default:
         <div>There is no data to display</div>;
