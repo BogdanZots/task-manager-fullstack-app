@@ -7,7 +7,7 @@ import { rootSaga } from "./sagas/rootSaga";
 const testMiddleware = (store) => {
   return function (next) {
     return function (action) {
-      console.log(store, next, action);
+      console.log('Store',store,"Next",next,'Action',action)
       next(action);
     };
   };

@@ -24,7 +24,6 @@ export default function TextForm({
       <Button
         text={buttonText}
         handleButtonClick={() => {
-          console.log("click button", buttonClickEvent);
           dispatch(
             buttonClickEvent({ email: emailState, password: passwordState })
           );

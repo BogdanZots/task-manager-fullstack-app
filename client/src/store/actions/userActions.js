@@ -8,7 +8,6 @@ export const USER_LOGOUT = "USER_LOGOUT";
 export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS";
 
 export const userRegistation = (data) => {
-  console.log("HERE");
   return {
     type: USER_RERISTRATION,
     payload: data,

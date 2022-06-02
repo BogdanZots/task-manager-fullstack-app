@@ -69,14 +69,12 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Header({ name }) {
-  const { data, isAuth } = useSelector(getUser);
-  const user = data;
+  const { isAuth } = useSelector(getUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  console.log(user);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);

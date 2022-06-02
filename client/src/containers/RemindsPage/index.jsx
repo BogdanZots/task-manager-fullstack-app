@@ -13,7 +13,6 @@ export default function RemindsPage() {
     data: { id },
   } = useSelector(getUser);
 
-  console.log("ID ? ", id);
 
   useEffect(() => {
     dispatch(loadRemindsRequest(id));

@@ -13,7 +13,6 @@ export default class AuthService {
     email: string,
     password: string
   ): Promise<AxiosResponse<IAuthResponse>> {
-    console.log("login");
     return $api.post<IAuthResponse>(`${API_URL}${LOGIN_URL}`, {
       email,
       password,
