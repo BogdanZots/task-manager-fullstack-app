@@ -1,17 +1,20 @@
-import React, { useState } from "react";
 import { Box } from "@mui/system";
 import Button from "@mui/material/Button";
 import InputItem from "../../../../Input/InputItem";
-import { createItemColumns } from "../../../../../../config/config";
 
 export const CreateItemForm = ({
   onChange,
-  onButtonClick,
+  submitForm,
   isButtonDisabled,
+  columns,
 }) => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    submitForm();
+  };
   return (
     <Box>
-      {createItemColumns.map((column) => {
+      {columns.map((column) => {
         return (
           <InputItem
             type={column.type}
@@ -24,7 +27,7 @@ export const CreateItemForm = ({
           />
         );
       })}
-      <Button disabled={isButtonDisabled} onClick={onButtonClick}>
+      <Button disabled={isButtonDisabled} onClick={handleFormSubmit}>
         Save item
       </Button>
     </Box>
