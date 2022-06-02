@@ -15,7 +15,6 @@ export default class RemindsService {
     description: string,
     id: string
   ) {
-    console.log({ url, title, description, id });
     return $api.post(`api${url}`, {
       title,
       description,

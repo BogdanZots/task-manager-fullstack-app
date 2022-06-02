@@ -10,7 +10,6 @@ const WithAccess = (ProtectedComponent, FallbackComponent) => {
   } = useSelector(getUser);
   return (props: any) => {
     const { accessRole } = props;
-    console.log(role, accessRole);
     if (role !== accessRole || !role || !accessRole) {
       return <FallbackComponent />;
     }

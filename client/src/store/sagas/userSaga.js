@@ -28,19 +28,16 @@ function* userRegistation(action) {
       yield put(userRegistationSuccess(response.data));
     }
   } catch (e) {
-    console.log(e);
   }
 }
 
 function* userLogin(action) {
-  console.log(action);
   const { email, password } = action.payload;
   try {
     const response = yield call(AuthService.login, email, password);
     localStorage.setItem("token", response.data.accessToken);
     yield put(userLoginSuccess(response.data));
   } catch (e) {
-    console.log("err");
     console.log(action, e);
   }
 }
@@ -48,7 +45,6 @@ function* userCheckAuth(action) {
   try {
     const response = yield call(AuthService.checkAuth);
     localStorage.setItem("token", response.data.accessToken);
-    console.log("CHECK");
     yield put(userCheckAuthSuccess(response));
   } catch (e) {
     console.log(action, e);

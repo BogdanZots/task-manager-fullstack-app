@@ -54,7 +54,6 @@ export default function SearchBasic() {
   const {
     data: { id },
   } = useSelector(getUser);
-  console.log(id);
   const handleInputChange = (searchField) => {
     dispatch(loadRemindsRequest(id, searchField));
   };

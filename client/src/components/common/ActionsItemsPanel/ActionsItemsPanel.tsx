@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Box, Button } from "@mui/material";
-import BasicModal from "../../common/BasicModal/BasicModal";
-import SearchBasic from "../SearchBasic/Search";
 import { useDispatch } from "react-redux";
 import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
 import { addItemForm } from "../../../configs/formsConfigs";
+import { INPUT_MODAL } from "../../../const/consts";
+import SearchBasic from "../SearchBasic/Search";
+import BasicModal from "../../common/BasicModal/BasicModal";
+import { Box } from "@mui/material";
 
 export default function ActionsItemsPanel() {
   const dispatch = useDispatch();
@@ -16,9 +16,8 @@ export default function ActionsItemsPanel() {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <BasicModal
-        //@ts-ignore
         getColumnsData={onButtonClick}
-        type="input-modal"
+        type={INPUT_MODAL}
         inputColumns={addItemForm}
       />
       <SearchBasic />
