@@ -91,6 +91,16 @@ export const createItemColumns = [
   },
 ];
 
-export const configsLength = {
+export interface configLengthProps {
+  [key: string]: number;
+}
+
+export const configsLength: configLengthProps = {
   CREATE_FORM: createItemColumns.length,
 };
+
+export interface modalTypesProps {
+  inputModal: string;
+}
+
+
