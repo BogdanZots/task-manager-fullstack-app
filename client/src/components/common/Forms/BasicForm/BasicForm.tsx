@@ -9,15 +9,15 @@ import {
 import { isItemEmpty } from "../../../../helpres/isItemEmpty";
 import { CreateItemForm } from "./Forms/CustoForms/CreateItemForm";
 import RegistrationForm from "./Forms/CustoForms/ResistrationForm";
+import { Box } from "@mui/material";
 
 interface BasicFormProps {
   type: string;
   userId: number;
-  submitForm: Function;
+  onSubmit: Function;
 }
-
 export default function BasicForm({
-  submitForm,
+  onSubmit,
   type,
   userId,
 }: BasicFormProps) {
@@ -42,11 +42,10 @@ export default function BasicForm({
   };
 
   const handleFromSubmit = (e: any) => {
-    submitForm(fields);
+    onSubmit(fields);
   };
 
-
-
+  
   useDeepEffect(changeButtonState, [fields, isFieldsEmpty]);
 
   const renderBasicForm = (type: string) => {
@@ -56,7 +55,7 @@ export default function BasicForm({
           <CreateItemForm
             columns={createItemColumns}
             onChange={handleConfigUpdate}
-            submitForm={handleFromSubmit}
+            onSubmit={handleFromSubmit}
             isButtonDisabled={buttonDisabled}
           />
         );
@@ -65,13 +64,13 @@ export default function BasicForm({
           <RegistrationForm
             onChange={handleConfigUpdate}
             columns={registrationInputColumns}
-            submitForm={handleFromSubmit}
+            onSubmit={handleFromSubmit}
           />
         );
       }
       default:
-        <div>There is no data to display</div>;
+        <Box>There is no data to display</Box>;
     }
   };
-  return <div>{renderBasicForm(type)}</div>;
+  return <Box>{renderBasicForm(type)}</Box>;
 }

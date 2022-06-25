@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
 
 interface IInputItem {
   type: string;
@@ -25,17 +26,15 @@ export default React.memo(function InputItem({
     onChangeEvent(fieldName, newValue);
   };
   return (
-    <div className="form-floating">
-      <input
-        value={value}
-        onChange={(e) => handleChange(e.target.value)}
-        type={type}
-        className={`form-control + ${className || ""}`}
-        id="floatingInput"
-        placeholder={placeholder}
-        name={name}
-      />
-      <label htmlFor="floatingInput">{label}</label>
-    </div>
+    <TextField
+      variant="outlined"
+      value={value}
+      onChange={(e) => handleChange(e.target.value)}
+      type={type}
+      id="floatingInput"
+      placeholder={placeholder}
+      name={name}
+      label={label}
+    />
   );
 });

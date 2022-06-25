@@ -1,46 +1,60 @@
 import InputItem from "../../../../Input/InputItem";
 import BasicSelect from "../../../../../Select/Select";
 import { selectRoleColumns } from "../../../../../../config/config";
+import { FormControl, FormHelperText, Button } from "@mui/material";
+import styled from "styled-components";
 
-const RegistrationForm = ({ onChange, columns, userId, submitForm }: any) => {
+const StyledButton = styled(Button)`
+  background-color: blue;
+`;
+
+const StyledFormHelperText = styled(FormHelperText)`
+  font-weight: 800;
+  font-size: 40px;
+`;
+
+const RegistrationForm = ({
+  onChange,
+  columns,
+  onSubmit,
+  isButtonDisabled,
+}: any) => {
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
-    submitForm();
+    onSubmit();
   };
 
-
   return (
-    <main className="form-signin text-center d-flex justify-content-center col-12">
-      <form className="col-6">
-        <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
-        {columns.map((column: any) => {
-          return (
-            <InputItem
-              onChangeEvent={onChange}
-              type={column.type}
-              className={column.className}
-              id={column.id}
-              placeholder={column.placeholder}
-              label={column.label}
-              fieldName={column.fieldName}
-            />
-          );
-        })}
+    <FormControl>
+      <StyledFormHelperText>Please sign up</StyledFormHelperText>
+      {columns.map((column: any) => {
+        return (
+          <InputItem
+            onChangeEvent={onChange}
+            type={column.type}
+            className={column.className}
+            id={column.id}
+            placeholder={column.placeholder}
+            label={column.label}
+            fieldName={column.fieldName}
+          />
+        );
+      })}
 
-        <BasicSelect
-          onChangeEvent={onChange}
-          columns={selectRoleColumns}
-          title="Select person role"
-        />
-        <button
-          className="w-100 btn btn-lg btn-primary"
-          type="submit"
-          onClick={handleFormSubmit}
-        >
-          Sign up
-        </button>
-      </form>
-    </main>
+      <BasicSelect
+        onChangeEvent={onChange}
+        columns={selectRoleColumns}
+        title="Select person role"
+      />
+      <StyledButton
+        type="submit"
+        disabled={isButtonDisabled}
+        onClick={handleFormSubmit}
+        variant="contained"
+      >
+        Sign up
+      </StyledButton>
+    </FormControl>
   );
 };
 

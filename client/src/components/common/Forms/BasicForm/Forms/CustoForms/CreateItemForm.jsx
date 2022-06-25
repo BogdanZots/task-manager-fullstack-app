@@ -1,19 +1,25 @@
 import { Box } from "@mui/system";
 import Button from "@mui/material/Button";
 import InputItem from "../../../../Input/InputItem";
+import styled from "styled-components";
+
+const FormWrapper = styled("div")`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const CreateItemForm = ({
   onChange,
-  submitForm,
+  onSubmit,
   isButtonDisabled,
   columns,
 }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    submitForm();
+    onSubmit();
   };
   return (
-    <Box>
+    <FormWrapper>
       {columns.map((column) => {
         return (
           <InputItem
@@ -30,6 +36,6 @@ export const CreateItemForm = ({
       <Button disabled={isButtonDisabled} onClick={handleFormSubmit}>
         Save item
       </Button>
-    </Box>
+    </FormWrapper>
   );
 };

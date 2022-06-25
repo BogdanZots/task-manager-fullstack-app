@@ -4,10 +4,7 @@ import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
 import { getUser } from "../../../store/selectors/userSelector";
 import { CREATE_FORM, INPUT_MODAL } from "../../../const/consts";
 import BasicForm from "../Forms/BasicForm/BasicForm";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+import { Box, Button, Typography, Modal } from "@mui/material";
 import s from "styled-components";
 
 const Container = s.div`
@@ -52,7 +49,7 @@ export default function BasicModal({ type }: IBasicModalProps) {
             <BasicForm
               type={CREATE_FORM}
               userId={id}
-              submitForm={handleFormSubmit}
+              onSubmit={handleFormSubmit}
             />
           </Box>
         );
@@ -74,13 +71,7 @@ export default function BasicModal({ type }: IBasicModalProps) {
 
   return (
     <Container>
-      <Button
-        onClick={() => {
-          handleOpen();
-        }}
-      >
-        Create Item
-      </Button>
+      <Button onClick={handleOpen}>Create Item</Button>
       <Modal
         open={open}
         onClose={handleClose}
