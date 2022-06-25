@@ -26,17 +26,14 @@ const initialState: IUserStatus = {
 };
 
 export default function userReducer(state = initialState, action: any) {
-  console.log("REDUCER");
   switch (action.type) {
     case USER_RERISTRATION_SUCCESS: {
-      console.log(action);
       return {
         ...state,
         isAuth: false,
       };
     }
     case USER_LOGIN_SUCCESS: {
-      console.log(action);
       const { data } = action.payload;
       return {
         ...state,

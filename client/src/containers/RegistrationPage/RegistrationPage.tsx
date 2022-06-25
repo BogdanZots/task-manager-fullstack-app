@@ -1,24 +1,18 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { useDispatch, useSelector } from "react-redux";
-import BasicForm from "../../components/common/BasicForm/BasicForm";
-import { registrationFormColumns } from "../../configs/formsConfigs";
+import { useSelector } from "react-redux";
+import BasicForm from "../../components/common/Forms/BasicForm/BasicForm";
 import { REGISTRATION_FORM } from "../../const/consts";
 import { userRegistation } from "../../store/actions/userActions";
+import { getUser } from "../../store/selectors/userSelector";
 const RegistrationPage = () => {
-  //@ts-ignore
-  const { id } = useSelector((store) => store.user.data);
-  const dispatch = useDispatch();
-  const onButtonClick = (data: any) => {
-    console.log("here");
-    dispatch(userRegistation(data));
-  };
+  const {
+    data: { id },
+  } = useSelector(getUser);
   return (
     <BasicForm
       type={REGISTRATION_FORM}
-      inputColumns={registrationFormColumns}
-      getColumnsData={onButtonClick}
+      submitForm={userRegistation}
       userId={id}
     />
   );
 };
-export default RegistrationPage; /* eslint-disable react-hooks/rules-of-hooks */
+export default RegistrationPage; 

@@ -7,7 +7,6 @@ interface IDefaultItemsLayout {
 }
 export default function DefaultItemsLayout(props: IDefaultItemsLayout) {
   const { items } = props;
-  console.log("items", items);
   return (
     <Box
       sx={{

@@ -52,7 +52,6 @@ export interface IUserLoginAction {
 
 //@ts-ignore
 export const userLogin = (data: ILogin): IUserLoginAction => {
-  console.log("login");
   return {
     type: USER_LOGIN,
     payload: data,

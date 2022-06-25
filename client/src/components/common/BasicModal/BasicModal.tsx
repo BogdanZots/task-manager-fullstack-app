@@ -1,15 +1,14 @@
-import * as React from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
+import { getUser } from "../../../store/selectors/userSelector";
+import { CREATE_FORM, INPUT_MODAL } from "../../../const/consts";
+import BasicForm from "../Forms/BasicForm/BasicForm";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import InputItem from "../Input/InputItem";
-import { useState } from "react";
-import BasicForm from "../BasicForm/BasicForm";
-import { CREATE_FORM } from "../../../const/consts";
 import s from "styled-components";
-import { useSelector } from "react-redux";
-import { getUserId } from "../../../store/selectors/userSelector";
 
 const Container = s.div`
 display : inline
@@ -33,36 +32,27 @@ interface IBasicModalProps {
   inputColumns: any;
 }
 
-export default function BasicModal({
-  type,
-  getColumnsData,
-  inputColumns,
-}: IBasicModalProps) {
+export default function BasicModal({ type }: IBasicModalProps) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  //@ts-ignore
-<<<<<<< HEAD
-  const id = useSelector(getUserId);
-  
-  const handleInputTitle = (e: any) => {
-    setInputTitle(e);
+  const {
+    data: { id },
+  } = useSelector(getUser);
+  const dispatch = useDispatch();
+  const handleFormSubmit = (data: any) => {
+    dispatch(setRemindsItemRequest({ ...data, id }));
   };
-=======
-  const { id } = useSelector((store) => store.user.data);
->>>>>>> develop
 
-  //@ts-ignore
   const renderModal = (type: string): JSX.Element => {
     switch (type) {
-      case "input-modal":
+      case INPUT_MODAL:
         return (
           <Box sx={style}>
             <BasicForm
               type={CREATE_FORM}
               userId={id}
-              getColumnsData={getColumnsData}
-              inputColumns={inputColumns}
+              submitForm={handleFormSubmit}
             />
           </Box>
         );
@@ -78,7 +68,7 @@ export default function BasicModal({
           </Box>
         );
       default:
-        <div>There is no data to display</div>;
+        return <div>There is no data to display</div>;
     }
   };
 
@@ -87,8 +77,8 @@ export default function BasicModal({
       <Button
         onClick={() => {
           handleOpen();
-          /*  debugger; */
-        }}>
+        }}
+      >
         Create Item
       </Button>
       <Modal

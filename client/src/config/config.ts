@@ -1,4 +1,5 @@
 import { roles } from "../const/consts";
+import { CREATE_FORM } from "../const/consts";
 
 export const registrationInputColumns = [
   {
@@ -89,3 +90,17 @@ export const createItemColumns = [
     fieldName: "description",
   },
 ];
+
+export interface configLengthProps {
+  [key: string]: number;
+}
+
+export const configsLength: configLengthProps = {
+  CREATE_FORM: createItemColumns.length,
+};
+
+export interface modalTypesProps {
+  inputModal: string;
+}
+
+

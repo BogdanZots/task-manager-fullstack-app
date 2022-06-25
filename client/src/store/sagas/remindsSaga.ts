@@ -22,13 +22,11 @@ function* loadReminds(action: any) {
   } catch (e) {
     const error: string = e === "" ? "Unknown error" : "Error is " + e;
     yield put(loadRemindsError(error));
-    console.log(e);
   }
 }
 
 function* addRemind(action: any) {
-  const { title, description, userId } = action.payload;
-  const id = userId;
+  const { title, description, id } = action.payload;
   try {
     //@ts-ignore
     const response = yield call(
@@ -42,7 +40,6 @@ function* addRemind(action: any) {
   } catch (e) {
     const error: string = e === "" ? "Unknown error" : "Error is " + e;
     yield put(setRemindsItemError(error));
-    console.log(e);
   }
 }
 
