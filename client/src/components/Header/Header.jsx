@@ -16,10 +16,11 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { userLogout } from "../../store/actions/userActions";
 import { Button } from "@mui/material";
 import { getUser } from "../../store/selectors/userSelector";
+import { useTranslation } from "react-i18next";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -69,17 +70,16 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Header({ name }) {
+  const [t] = useTranslation();
   const { isAuth } = useSelector(getUser);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
+  const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -92,9 +92,11 @@ export default function Header({ name }) {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
+  const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const handleUserLogout = () => dispatch(userLogout());
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -114,25 +116,13 @@ export default function Header({ name }) {
       onClose={handleMenuClose}
     >
       {!isAuth ? (
-        <MenuItem
-          onClick={() => {
-            handleMenuClose();
-            navigate("/login");
-          }}
-        >
-          Sign in
-        </MenuItem>
+        <Link to="/login">
+          <MenuItem onClick={handleMenuClose}>{t("auth.signUp")}</MenuItem>
+        </Link>
       ) : (
         ""
       )}
-      <MenuItem
-        onClick={() => {
-          handleMenuClose();
-          navigate("/registration");
-        }}
-      >
-        Sign up
-      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>{t("auth.signUp")}</MenuItem>
     </Menu>
   );
 
@@ -162,11 +152,7 @@ export default function Header({ name }) {
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
+        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -205,7 +191,12 @@ export default function Header({ name }) {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{
+              display: {
+                xs: "none",
+                sm: "block",
+              },
+            }}
           >
             MUI
           </Typography>
@@ -215,32 +206,20 @@ export default function Header({ name }) {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
+              inputProps={{
+                "aria-label": "search",
+              }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }}></Box>
-          <Box>
-            {isAuth ? (
-              <StyledButton
-                onClick={() => {
-                  dispatch(userLogout());
-                  navigate("/login");
-                }}
-              >
-                Logout
-              </StyledButton>
-            ) : (
-              ""
-            )}
-          </Box>
+          <Box>{isAuth ? <StyledButton onClick={handleUserLogout}>Logout</StyledButton> : ""}</Box>
           <Box
-            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
+            sx={{
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+            }}
           >
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
+            <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
@@ -260,7 +239,11 @@ export default function Header({ name }) {
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="show more"

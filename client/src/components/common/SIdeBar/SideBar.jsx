@@ -12,17 +12,13 @@ import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import Toolbar from "@mui/material/Toolbar";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
 const drawerWidth = 240;
 
 function SideBar(props) {
-  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   const drawer = (
     <List sx={{ dispaly: "inline", ul: { display: "inline" } }}>
