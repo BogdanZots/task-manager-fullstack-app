@@ -6,7 +6,6 @@ import {
   USER_LOGIN,
 } from "../actions/userActions";
 import { IUser } from "../../models/IUser";
-import { redirect } from "../../helpres/redirect";
 
 interface IUserStatus {
   isAuth: boolean;
