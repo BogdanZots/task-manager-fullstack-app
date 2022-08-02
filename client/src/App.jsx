@@ -46,9 +46,7 @@ function App() {
           <Route path="/reminds" element={<RemindsPageWithAuth />} />
           <Route
             path="/admin"
-            element={
-              <AdminsPageWithAccess accessRole={roles.adminRole.ROLE_NAME} />
-            }
+            element={<AdminsPageWithAccess accessRole={roles.adminRole.ROLE_NAME} />}
           />
         </Routes>
       </Box>
