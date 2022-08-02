@@ -4,7 +4,7 @@ import {
   LOAD_REMINDS_ERROR,
   SET_REMINDS_SUCCESS,
 } from "../actions/remindsAction";
-import { IReminds } from "../../models/IReminds";
+import { IReminds } from "../../models/reminds/IReminds";
 
 interface IReminsReducer {
   isLoading: boolean;
@@ -18,10 +18,7 @@ const initialState: IReminsReducer = {
   error: "",
 };
 
-export default function remindsReducer(
-  state = initialState,
-  action: any
-): IReminsReducer {
+export default function remindsReducer(state = initialState, action: any): IReminsReducer {
   switch (action.type) {
     case LOAD_REMINDS_REQUEST: {
       return {

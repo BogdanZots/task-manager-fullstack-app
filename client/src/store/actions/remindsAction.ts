@@ -1,4 +1,4 @@
-import { IReminds } from "../../models/IReminds";
+import { IReminds } from "../../models/reminds/IReminds";
 
 export const LOAD_REMINDS_REQUEST = "LOAD_REMINDS_REQUEST";
 export const LOAD_REMINDS_SUCCESS = "LOAD_REMINDS_SUCCESS";

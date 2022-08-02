@@ -5,7 +5,7 @@ import {
   USER_LOGOUT_SUCCESS,
   USER_LOGIN,
 } from "../actions/userActions";
-import { IUser } from "../../models/IUser";
+import { IUser } from "../../models/user/IUser";
 
 interface IUserStatus {
   isAuth: boolean;
