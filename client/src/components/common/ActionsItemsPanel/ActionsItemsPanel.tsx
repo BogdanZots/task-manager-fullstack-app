@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
-import { addItemForm } from "../../../configs/formsConfigs";
+import { addItemForm } from "../../../config/config";
 import { INPUT_MODAL } from "../../../const/consts";
 import SearchBasic from "../SearchBasic/Search";
 import BasicModal from "../../common/BasicModal/BasicModal";

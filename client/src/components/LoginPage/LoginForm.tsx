@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { userLogin } from "../../store/actions/userActions";
 import InputItem from "../common/Input/InputItem";
 import { loginInputColumns } from "../../config/config";
@@ -9,7 +8,6 @@ import { ILogin } from "../../interfaces/userInterface/registrationInterface";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   //@ts-ignore
   let data: ILogin = {};
