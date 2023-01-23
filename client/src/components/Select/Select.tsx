@@ -18,23 +18,23 @@ interface IBasicColumn {
   options: IOptionsColumns[];
 }
 
-interface IBasicSelectProps {
+export interface IBasicSelectProps {
   columns: IBasicColumn[];
   onChangeEvent: (fieldName: string, newValue: any) => void;
   title: string;
 }
-//@ts-ignore
-const renderOptions = (options: IOptionsColumns[]): ReactElement => {
+
+const renderOptions = (options: IOptionsColumns[]): Array<React.ReactElement> => {
   return options.map((option: any) => {
-    return <MenuItem value={option.value}>{option.title}</MenuItem>;
+    return (
+      <MenuItem key={option.value} value={option.value}>
+        {option.title}
+      </MenuItem>
+    );
   });
 };
 
-export default function BasicSelect({
-  columns,
-  title,
-  onChangeEvent,
-}: IBasicSelectProps) {
+export default function BasicSelect({ columns, title, onChangeEvent }: IBasicSelectProps) {
   const [value, setValue] = React.useState("");
   const handleChange = (fieldName: string, newValue: string) => {
     setValue(newValue);
@@ -43,15 +43,18 @@ export default function BasicSelect({
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id='demo-simple-select-label'>{title}</InputLabel>
+        <InputLabel id="demo-simple-select-label">{title}</InputLabel>
         {columns.map((column, i) => {
           return (
             <Select
+              key={column.labelId}
+              name="select"
               labelId={column.labelId}
               id={column.id}
               value={value}
               label={column.label}
-              onChange={(e) => handleChange(column.fieldName, e.target.value)}>
+              onChange={e => handleChange(column.fieldName, e.target.value)}
+            >
               {renderOptions(column.options)}
             </Select>
           );

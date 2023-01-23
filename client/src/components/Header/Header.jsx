@@ -117,12 +117,14 @@ export default function Header({ name }) {
     >
       {!isAuth ? (
         <Link to="/login">
-          <MenuItem onClick={handleMenuClose}>{t("auth.signUp")}</MenuItem>
+          <MenuItem onClick={handleMenuClose}>{t("auth.login")}</MenuItem>
         </Link>
       ) : (
         ""
       )}
-      <MenuItem onClick={handleMenuClose}>{t("auth.signUp")}</MenuItem>
+      <Link to="/registration">
+        <MenuItem onClick={handleMenuClose}>{t("auth.signUp")}</MenuItem>
+      </Link>
     </Menu>
   );
 
