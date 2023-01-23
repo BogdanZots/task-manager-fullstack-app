@@ -1,8 +1,12 @@
 {
+  "errors": {
+    "loadingProblem": "Unexpected problem is occurring..."
+  },
   "user": {
     "userProfile": "Profile"
   },
   "auth": {
+    "login": "Login",
     "signUp": "Sign up"
   }
 }
