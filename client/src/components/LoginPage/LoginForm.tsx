@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/actions/userActions";
 import InputItem from "../common/Input/InputItem";
 import { loginInputColumns } from "../../config/config";
-import { ILogin } from "../../interfaces/userInterface/registrationInterface";
+import { ILogin } from "../../models/registration/registrationInterface";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

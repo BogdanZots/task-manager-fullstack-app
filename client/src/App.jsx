@@ -17,6 +17,7 @@ import NoAccessPage from "./containers/FallbackPages/NoAccessPage";
 import { roles } from "./const/consts";
 import { Box } from "@mui/material";
 import { getUser } from "./store/selectors/userSelector";
+import ErrorBoundary from "./components/common/ErrorBoundary/ErrorBoundary";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,26 +34,26 @@ function App() {
   const RemindsPageWithAuth = WithAuth(RemindsPage, LoginPage);
   const AdminsPageWithAccess = WithAccess(AdminPage, NoAccessPage);
   return (
-    <div className="App">
-      <Header name={user.name ? user.name : ""} />
-      <Box sx={{ display: "flex" }}>
-        <SideBar />
-        <Routes>
-          <Route path="/home" element={<StartPage testProps="test" />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/registration" element={<RegistrationPage />} />
-          <Route path="/batch" element={<BatchPageWithAuth />} />
-          <Route path="/notes" element={<NotesPageWithAuth />} />
-          <Route path="/reminds" element={<RemindsPageWithAuth />} />
-          <Route
-            path="/admin"
-            element={
-              <AdminsPageWithAccess accessRole={roles.adminRole.ROLE_NAME} />
-            }
-          />
-        </Routes>
-      </Box>
-    </div>
+    <ErrorBoundary>
+      <div className="App">
+        <Header name={user.name ? user.name : ""} />
+        <Box sx={{ display: "flex" }}>
+          <SideBar />
+          <Routes>
+            <Route path="/home" element={<StartPage testProps="test" />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/batch" element={<BatchPageWithAuth />} />
+            <Route path="/notes" element={<NotesPageWithAuth />} />
+            <Route path="/reminds" element={<RemindsPageWithAuth />} />
+            <Route
+              path="/admin"
+              element={<AdminsPageWithAccess accessRole={roles.adminRole.ROLE_NAME} />}
+            />
+          </Routes>
+        </Box>
+      </div>
+    </ErrorBoundary>
   );
 }
 

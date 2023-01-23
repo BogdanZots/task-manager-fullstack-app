@@ -2,7 +2,7 @@ import {
   ILogin,
   IRegistration,
   IRegistrationSuccess,
-} from "../../interfaces/userInterface/registrationInterface";
+} from "../../models/registration/registrationInterface";
 
 export const USER_RERISTRATION = "USER_REGISTRATION";
 export const USER_RERISTRATION_SUCCESS = "USER_REGISTRATION_SUCCESS";
