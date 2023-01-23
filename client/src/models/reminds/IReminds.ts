@@ -1,8 +1,7 @@
-export interface IReminds {
-  startDate: Date;
-  endDate: Date;
+export interface IRemind {
   description: string;
+  id: string;
   title: string;
-  remindId: number;
-  isCompleted: boolean;
+  __v: number;
+  _id: string;
 }

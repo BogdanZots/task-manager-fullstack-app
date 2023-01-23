@@ -3,12 +3,14 @@ import {
   LOAD_REMINDS_SUCCESS,
   LOAD_REMINDS_ERROR,
   SET_REMINDS_SUCCESS,
+  REMOVE_REMIND_CARD,
+  REMOVE_REMIND_CARD_SUCCESS,
 } from "../actions/remindsAction";
-import { IReminds } from "../../models/reminds/IReminds";
+import { IRemind } from "../../models/reminds/IReminds";
 
 interface IReminsReducer {
   isLoading: boolean;
-  data: IReminds[];
+  data: IRemind[];
   error: string;
 }
 
@@ -36,19 +38,29 @@ export default function remindsReducer(state = initialState, action: any): IRemi
       };
     }
     case LOAD_REMINDS_SUCCESS: {
-      const { data } = action.payload;
+      const { payload } = action;
       return {
         ...state,
         isLoading: false,
-        data: data.remindData,
+        data: payload,
       };
     }
     case SET_REMINDS_SUCCESS: {
+      const { payload } = action;
       return {
         ...state,
         isLoading: false,
-        data: [...state.data, action.payload.data.remindData],
+        data: [...state.data, payload],
       };
+    }
+    case REMOVE_REMIND_CARD: {
+      return {
+        ...state,
+      };
+    }
+    case REMOVE_REMIND_CARD_SUCCESS: {
+      const { payload } = action;
+      return { ...state, data: payload };
     }
     default:
       return state;
