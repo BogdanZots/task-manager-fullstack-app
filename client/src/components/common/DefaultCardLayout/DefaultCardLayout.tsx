@@ -1,37 +1,41 @@
 import * as React from "react";
-import { CardActions, CardContent, Button, Typography , Card , Box} from "@mui/material";
+import { CardActions, CardContent, Button, Typography, Card, Box } from "@mui/material";
+import s from "styled-components";
 
 interface ICardProps {
   title: string;
   description: string;
 }
 
+const StyledCardBox = s(Box)`
+min-Width : 275px;
+`;
+
+const StyledCardTypography = s(Typography)`
+margin-bottom : 2px;
+font-size : 14px;
+`;
+
 export default function DefaultCardLayot({ title, description }: ICardProps) {
   return (
-    <Box sx={{ minWidth: 275 }}>
+    <StyledCardBox>
       <Card variant="outlined">
-        <React.Fragment>
+        <>
           <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
+            <StyledCardTypography color="text.secondary" gutterBottom>
               Word of the Day
-            </Typography>
+            </StyledCardTypography>
             <Typography variant="h5" component="div">
               {title}
             </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              adjective
-            </Typography>
-            <Typography variant="body2">{description}</Typography>
+            <StyledCardTypography color="text.secondary">adjective</StyledCardTypography>
+            <StyledCardTypography variant="body2">{description}</StyledCardTypography>
           </CardContent>
           <CardActions>
             <Button size="small">Learn More</Button>
           </CardActions>
-        </React.Fragment>
+        </>
       </Card>
-    </Box>
+    </StyledCardBox>
   );
 }
