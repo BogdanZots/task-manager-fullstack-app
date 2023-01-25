@@ -7,9 +7,17 @@ class RemindsService {
     return remind;
   }
   async fetchReminds(id, searchField) {
-    const reminds = await remindsModel.find({ id, title: { "$regex": `${searchField}`, "$options": "i" }});
+    const reminds = await remindsModel.find({
+      id,
+      title: { $regex: `${searchField}`, $options: "i" },
+    });
     if (!reminds) return null;
     return reminds;
+  }
+  async deleteRemind(id) {
+    const remind = await remindsModel.findOneAndRemove({ _id: id });
+    if (!remind) return null;
+    return remind;
   }
 }
 

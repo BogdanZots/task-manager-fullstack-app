@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/actions/userActions";
-import InputItem from "../common/Input/InputItem";
+import InputItem from "../common/Inputs/InputItem";
 import { loginInputColumns } from "../../config/config";
 import { ILogin } from "../../models/registration/registrationInterface";
 
@@ -19,7 +19,7 @@ const LoginForm = () => {
     <main className="form-signin text-center d-flex justify-content-center mt-5 align-items-center col-12">
       <form className="col-3">
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-        {loginInputColumns.map((column) => {
+        {loginInputColumns.map(column => {
           return (
             <div className="form-floating">
               <InputItem
@@ -37,7 +37,7 @@ const LoginForm = () => {
         <button
           className="w-100 btn btn-lg btn-primary"
           type="submit"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             dispatch(userLogin({ ...data }));
           }}

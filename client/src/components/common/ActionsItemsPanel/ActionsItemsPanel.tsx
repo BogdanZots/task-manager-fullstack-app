@@ -3,7 +3,7 @@ import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
 import { addItemForm } from "../../../config/config";
 import { INPUT_MODAL } from "../../../const/consts";
 import SearchBasic from "../SearchBasic/Search";
-import BasicModal from "../../common/BasicModal/BasicModal";
+import ModalLayout from "../ModalLayout/ModalLayout";
 import { Box } from "@mui/material";
 
 export default function ActionsItemsPanel() {
@@ -15,11 +15,7 @@ export default function ActionsItemsPanel() {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <BasicModal
-        getColumnsData={onButtonClick}
-        type={INPUT_MODAL}
-        inputColumns={addItemForm}
-      />
+      <ModalLayout getColumnsData={onButtonClick} type={INPUT_MODAL} inputColumns={addItemForm} />
       <SearchBasic />
     </Box>
   );

@@ -1,5 +1,12 @@
 import { roles } from "../const/consts";
 import { CREATE_FORM } from "../const/consts";
+import { ICreateItemColumns } from "../models/configModels/configModels";
+
+//REDUX STORE
+
+export const reduxStoreConfig = {
+  reminds: "reminds",
+};
 
 //FORMS
 export const addItemForm = [

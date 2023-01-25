@@ -1,4 +1,5 @@
-import { IReminds } from "../../models/reminds/IReminds";
+import { strict } from "assert";
+import { IRemind } from "../../models/reminds/IReminds";
 
 export const LOAD_REMINDS_REQUEST = "LOAD_REMINDS_REQUEST";
 export const LOAD_REMINDS_SUCCESS = "LOAD_REMINDS_SUCCESS";
@@ -6,6 +7,9 @@ export const LOAD_REMINDS_ERROR = "LOAD_REMINDS_ERROR";
 export const SET_REMINDS_ITEM = "SET_REMINDS_ITEM";
 export const SET_REMINDS_SUCCESS = "SET_REMINDS_SUCCESS";
 export const SET_REMINDS_ERROR = "SET_REMINDS_ERROR";
+export const REMOVE_REMIND_CARD = "REMOVE_REMIND_CARD";
+export const REMOVE_REMIND_CARD_SUCCESS = "REMOVE_REMIND_SUCCESS";
+export const REMOVE_REMIND_CARD_ERROR = "REMOVE_REMIND_ERROR";
 
 // LOAD
 export interface IloadRemindsRequestAction {
@@ -14,7 +18,7 @@ export interface IloadRemindsRequestAction {
 }
 export const loadRemindsRequest = (
   id: string,
-  searchField?: string
+  searchField?: string,
 ): IloadRemindsRequestAction => ({
   type: LOAD_REMINDS_REQUEST,
   payload: { id, searchField },
@@ -22,10 +26,10 @@ export const loadRemindsRequest = (
 
 export interface IloadRemindsSuccess {
   type: typeof LOAD_REMINDS_SUCCESS;
-  payload: IReminds[];
+  payload: IRemind[];
 }
 
-export const loadRemindsSuccess = (data: IReminds[]): IloadRemindsSuccess => ({
+export const loadRemindsSuccess = (data: any[]): IloadRemindsSuccess => ({
   type: LOAD_REMINDS_SUCCESS,
   payload: data,
 });
@@ -55,12 +59,10 @@ export const setRemindsItemRequest = (data: any): ISetRemindsItemAction => {
 
 export interface ISetRemindsItemSuccess {
   type: typeof SET_REMINDS_SUCCESS;
-  payload: IReminds[];
+  payload: IRemind;
 }
 
-export const setRemindsItemSuccess = (
-  data: IReminds[]
-): ISetRemindsItemSuccess => ({
+export const setRemindsItemSuccess = (data: IRemind): ISetRemindsItemSuccess => ({
   type: SET_REMINDS_SUCCESS,
   payload: data,
 });
@@ -72,5 +74,35 @@ export interface ISetRemindsItemError {
 
 export const setRemindsItemError = (error: string): ISetRemindsItemError => ({
   type: SET_REMINDS_ERROR,
+  payload: error,
+});
+
+export interface IRemoveRemindCard {
+  type: typeof REMOVE_REMIND_CARD;
+  payload: string;
+}
+
+export const removeRemindCard = (id: string): IRemoveRemindCard => ({
+  type: REMOVE_REMIND_CARD,
+  payload: id,
+});
+
+export interface IRemoveRemindCardSuccess {
+  type: typeof REMOVE_REMIND_CARD_SUCCESS;
+  payload: Array<IRemind>;
+}
+
+export const removeRemindCardSuccess = (reminds: Array<IRemind>): IRemoveRemindCardSuccess => ({
+  type: REMOVE_REMIND_CARD_SUCCESS,
+  payload: reminds,
+});
+
+export interface IRemoveRemindCardError {
+  type: typeof REMOVE_REMIND_CARD_ERROR;
+  payload: string;
+}
+
+export const removeRemindCardError = (error: string): IRemoveRemindCardError => ({
+  type: REMOVE_REMIND_CARD_ERROR,
   payload: error,
 });
