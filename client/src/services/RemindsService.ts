@@ -4,11 +4,7 @@ import { IRemind } from "../models/reminds/IReminds";
 
 export default class RemindsService {
   static async fetchReminds(id: string): Promise<AxiosResponse<IRemind[]>> {
-    const response = await $api.get(`api${id}`, {
-      headers: {
-        pragma: "test",
-      },
-    });
+    const response = await $api.get(`api${id}`);
     return response.data;
   }
   static async addRemind(

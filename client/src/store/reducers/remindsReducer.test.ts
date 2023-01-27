@@ -1,8 +1,20 @@
-const initialState = { isLoading: false, data: [{}, {}], error: "" };
+const initialState = {
+  isLoading: false,
+  data: [
+    {
+      description: "",
+      id: "",
+      title: "",
+      __v: 0,
+      _id: "",
+    },
+  ],
+  error: "",
+};
 import { setRemindsItemSuccess } from "../actions/remindsAction";
 import reducer from "./remindsReducer";
 
-/* describe("reminds reducer test", () => {
+describe("reminds reducer test", () => {
   it("should add new reminds", () => {
     const newRemind = {
       id: "string",
@@ -13,8 +25,8 @@ import reducer from "./remindsReducer";
     };
     const action = setRemindsItemSuccess(newRemind);
     const newState = reducer(initialState, action);
-    expect(newState.data.length).toBe(3);
+    expect(newState.data.length).toBe(2);
   });
 });
- */
+
 export {};

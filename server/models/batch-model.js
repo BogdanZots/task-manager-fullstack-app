@@ -5,8 +5,8 @@ const BatchSchema = new Schema({
   // вызываем метод схема передаём туда обьект , этот обьект и есть наша схема данных
   title: { type: String, required: true },
   description: { type: String, required: true },
-  dueDate: { type: String, required: true },
-  priority: { type: Object, unique: true, required: true },
+  creationDate: { type: String, required: true },
+  priority: { type: Number, unique: true, required: true },
   status: { type: Boolean },
   userId: { type: Number, required: true },
 });

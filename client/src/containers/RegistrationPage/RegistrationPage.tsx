@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { getUser } from "../../store/selectors/userSelector";
 import { userRegistation } from "../../store/actions/userActions";
 import { useDispatch } from "react-redux";
-import { REGISTRATION_FORM } from "../../const/consts";
-import BasicForm from "../../components/common/Forms/BasicForm";
+import { REGISTRATION_FORM } from "../../const/const";
+import BasicForm from "../../components/common/Forms/FormLayout";
 const RegistrationPage = () => {
   const {
     data: { id },

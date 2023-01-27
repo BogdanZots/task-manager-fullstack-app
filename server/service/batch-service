@@ -1,0 +1,12 @@
+const batchModel = require("../models/batch-model");
+class RemindsService {
+  async fetchBatchItems(id) {
+    const batchItems = await batchModel.find({
+      id,
+    });
+    if (!batchItems) return null;
+    return batchItems;
+  }
+}
+
+module.exports = new RemindsService();

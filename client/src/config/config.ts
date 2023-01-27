@@ -1,5 +1,5 @@
-import { roles } from "../const/consts";
-import { CREATE_FORM } from "../const/consts";
+import { roles } from "../const/const";
+import { CREATE_FORM } from "../const/const";
 import { ICreateItemColumns } from "../models/configModels/configModels";
 
 //REDUX STORE
@@ -164,14 +164,6 @@ export const createItemColumns = [
 ];
 
 // TYPES
-
-export interface configLengthProps {
-  [key: string]: number;
-}
-
-export const configsLength: configLengthProps = {
-  CREATE_FORM: createItemColumns.length,
-};
 
 export interface modalTypesProps {
   inputModal: string;

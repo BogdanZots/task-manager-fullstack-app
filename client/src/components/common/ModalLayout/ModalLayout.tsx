@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setRemindsItemRequest } from "../../../store/actions/remindsAction";
 import { getUser } from "../../../store/selectors/userSelector";
-import { CREATE_FORM, INPUT_MODAL } from "../../../const/consts";
-import BasicForm from "../Forms/BasicForm";
+import { CREATE_FORM, INPUT_MODAL } from "../../../const/const";
+import BasicForm from "../Forms/FormLayout";
 import { Box, Button, Typography, Modal } from "@mui/material";
 import s from "styled-components";
 
@@ -45,6 +45,7 @@ export default function ModalLayout({ type }: IModalLayoutProps) {
   const dispatch = useDispatch();
   const handleFormSubmit = (data: any) => {
     dispatch(setRemindsItemRequest({ ...data, id }));
+    handleClose();
   };
 
   const renderModal = (type: string): JSX.Element => {
@@ -53,6 +54,7 @@ export default function ModalLayout({ type }: IModalLayoutProps) {
         return (
           <Box sx={style}>
             <BasicForm
+              //@ts-ignore
               isVisible={visible}
               onClose={handleClose}
               type={CREATE_FORM}

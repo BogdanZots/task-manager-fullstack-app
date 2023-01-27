@@ -14,7 +14,7 @@ import RegistrationPage from "./containers/RegistrationPage/RegistrationPage";
 import AdminPage from "./containers/AdminPage/AdminPage";
 import WithAccess from "./HOC/WithAccess";
 import NoAccessPage from "./containers/FallbackPages/NoAccessPage";
-import { roles } from "./const/consts";
+import { roles } from "./const/const";
 import { Box } from "@mui/material";
 import { getUser } from "./store/selectors/userSelector";
 import ErrorBoundary from "./components/common/ErrorBoundary/ErrorBoundary";

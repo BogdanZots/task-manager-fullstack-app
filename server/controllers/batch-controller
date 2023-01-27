@@ -1,0 +1,17 @@
+const ApiError = require("../exceptions/api-error");
+const { checkAuth } = require("../service/user-service");
+const userService = require("../service/user-service");
+const batchService = require("../service/batch-service");
+class BatchController {
+  async getBatchItems(req, res, next) {
+    const id = req.query.userId;
+    try {
+      const batchItems = await batchService.fetchBatchItems(id);
+      return res.json({ data: [...batchItems] }).status(200);
+    } catch (e) {
+      next(e);
+    }
+  }
+}
+
+module.exports = new BatchController();

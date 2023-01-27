@@ -4,6 +4,7 @@ const router = new Router();
 const { body } = require("express-validator");
 const authMiddleware = require("../middelwares/auth-middleware");
 const remindsRouter = require("./remindsRouter");
+const batchRouter = require("./batchRouter");
 router.post(
   "/registration",
   body("email").isEmail(),
@@ -11,7 +12,7 @@ router.post(
   userController.registration
 );
 
-// common 
+// common
 router.post("/login", userController.login);
 router.post("/logout", userController.logout);
 router.get("/activate/:link", userController.activate);
@@ -21,4 +22,5 @@ router.get("/check-auth", authMiddleware, userController.checkAuth);
 
 // reminds
 router.use("/reminds", remindsRouter); // router.use - middleware который потом передаёт управление на remindsRouter.js
+router.use("/batch", batchRouter);
 module.exports = router;

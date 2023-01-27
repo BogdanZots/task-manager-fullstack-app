@@ -1,40 +1,30 @@
 import { compose } from "redux";
 import { takeLatest, call, put, select } from "redux-saga/effects";
-import RemindsService from "../../services/RemindsService";
-import {
-  LOAD_REMINDS_REQUEST,
-  loadRemindsError,
-  loadRemindsSuccess,
-  setRemindsItemSuccess,
-  setRemindsItemError,
-  SET_REMINDS_ITEM,
-  REMOVE_REMIND_CARD,
-  IRemoveRemindCard,
-  removeRemindCardSuccess,
-} from "../actions/remindsAction";
 import { AxiosResponse } from "axios";
-import { IRemind } from "../../models/reminds/IReminds";
-import { updatedReminds } from "./helpers/updatedReminds";
-import { reduxStoreConfig } from "../../config/config";
+import {
+  LOAD_BATCH_ITEMS,
+  loadBatchItemsRequestSuccess,
+  loadBatchRequestError,
+} from "../actions/batchActions";
+import { IBatch } from "../../models/batch/batch";
+import BatchService from "../../services/BatchService";
 
-export function* loadReminds(action: any) {
+export function* loadBatchItems(action: any) {
   const { id, searchField } = action.payload;
   const concatedSearchField = "&searchField=" + searchField;
   try {
-    const response: AxiosResponse<Array<IRemind>> = yield call(
-      RemindsService.fetchReminds,
-      `/reminds?userId=${id}${searchField ? concatedSearchField : ""}`,
+    const response: AxiosResponse<Array<IBatch>> = yield call(
+      BatchService.fetchBatchItems,
+      `/batch?userId=${id}${searchField ? concatedSearchField : ""}`,
     );
-    console.log("response", response);
     const { data } = response;
-    console.log("Data?", data);
-    yield put(loadRemindsSuccess(data));
+    yield put(loadBatchItemsRequestSuccess(data));
   } catch (e) {
-    yield put(loadRemindsError(e as string));
+    yield put(loadBatchRequestError(e as string));
   }
 }
 
-function* addRemind(action: any) {
+/* function* addRemind(action: any) {
   const { title, description, id } = action.payload;
   try {
     const response: AxiosResponse<IRemind> = yield call(
@@ -62,10 +52,10 @@ function* removeRemind(action: IRemoveRemindCard) {
     const updatedData = updatedReminds("delete", remindsState.data, deletedRemind);
     yield put(removeRemindCardSuccess(updatedData));
   } catch {}
-}
+} */
 
-export default function* remindsSaga() {
-  yield takeLatest(LOAD_REMINDS_REQUEST, loadReminds);
-  yield takeLatest(SET_REMINDS_ITEM, addRemind);
-  yield takeLatest(REMOVE_REMIND_CARD, removeRemind);
+export default function* batchSaga() {
+  yield takeLatest(LOAD_BATCH_ITEMS, loadBatchItems);
+  /*   yield takeLatest(SET_REMINDS_ITEM, addRemind);
+  yield takeLatest(REMOVE_REMIND_CARD, removeRemind); */
 }

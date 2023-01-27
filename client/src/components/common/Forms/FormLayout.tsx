@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { useDeepEffect } from "../../../hooks/useDeepfEffect";
-import { CREATE_ITEM_FORM, REGISTRATION_FORM } from "../../../const/consts";
-import { configsLength, registrationInputColumns, createItemColumns } from "../../../config/config";
+import { useState, useRef, useEffect } from "react";
+import { CREATE_ITEM_FORM, REGISTRATION_FORM } from "../../../const/const";
+import { registrationInputColumns, createItemColumns } from "../../../config/config";
 import { isItemEmpty } from "../../../helpres/isItemEmpty";
 import { CreateItemForm } from "./CreateItemForm";
 import RegistrationForm from "./RegistrationForm";
@@ -11,16 +10,15 @@ interface BasicFormProps {
   type: string;
   userId: number;
   onSubmit: Function;
-  isVisible?: boolean;
-  onClose?: () => void;
 }
-export default function BasicForm({ onSubmit, type, userId, onClose, isVisible }: BasicFormProps) {
-  const [fields, setFields] = useState<{ [field: string]: any }>({});
+
+export default function BasicForm({ onSubmit, type }: BasicFormProps) {
   const [isFieldsEmpty, setIsEmpty] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const fieldsRef = useRef({});
 
   const changeButtonState = () => {
-    setIsEmpty(isItemEmpty(fields, configsLength[type]));
+    setIsEmpty(isItemEmpty(fieldsRef.current, createItemColumns.length));
     if (!isFieldsEmpty) {
       setButtonDisabled(false);
     } else if (isFieldsEmpty) {
@@ -29,21 +27,19 @@ export default function BasicForm({ onSubmit, type, userId, onClose, isVisible }
   };
 
   const handleConfigUpdate = (fieldName: string, newValue: any) => {
-    setFields(prevFields => ({
-      ...prevFields,
-      [fieldName]: newValue,
-    }));
+    fieldsRef.current = { ...fieldsRef.current, [fieldName]: newValue };
+    changeButtonState();
   };
 
-  const handleFromSubmit = (e: any) => {
-    onSubmit(fields);
-    onClose && onClose();
+  const handleFromSubmit = () => {
+    onSubmit(fieldsRef.current);
   };
 
-  useDeepEffect(changeButtonState, [fields, isFieldsEmpty]);
+  useEffect(() => {
+    changeButtonState();
+  }, [isFieldsEmpty]);
 
   const renderBasicForm = (type: string) => {
-    if (!isVisible) return null;
     switch (type) {
       case CREATE_ITEM_FORM:
         return (
