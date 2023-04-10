@@ -6,7 +6,7 @@ import { rootSaga } from "./sagas/rootSaga";
 
 import { compose } from "redux";
 
-const testMiddleware = (store) => {
+const testMiddleware = store => {
   return function (next) {
     return function (action) {
       console.log("Store", store, "Next", next, "Action", action);
@@ -24,9 +24,7 @@ const reducers = combineReducers({
 
 const store = createStore(
   reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-    applyMiddleware(testMiddleware, sagaMiddleware)
-  )
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(testMiddleware, sagaMiddleware)),
 );
 sagaMiddleware.run(rootSaga);
 window.store = store;

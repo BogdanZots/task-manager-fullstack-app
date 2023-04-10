@@ -29,7 +29,6 @@ export const CreateItemForm = ({
             onChangeEvent={onChange}
             label={column.label}
             name={column.name}
-            fieldName={column.fieldName}
           />
         );
       })}

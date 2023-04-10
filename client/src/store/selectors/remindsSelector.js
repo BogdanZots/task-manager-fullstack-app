@@ -1,1 +1,1 @@
-export const getReminds = (state) => state.reminds.data;
+export const getReminds = state => state.reminds.data;

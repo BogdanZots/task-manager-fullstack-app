@@ -13,14 +13,14 @@ interface IOptionsColumns {
 interface IBasicColumn {
   labelId: string;
   id: string;
-  fieldName: string;
+  name: string;
   label: string;
   options: IOptionsColumns[];
 }
 
 export interface IBasicSelectProps {
   columns: IBasicColumn[];
-  onChangeEvent: (fieldName: string, newValue: any) => void;
+  onChangeEvent: (name: string, newValue: any) => void;
   title: string;
 }
 
@@ -36,9 +36,9 @@ const renderOptions = (options: IOptionsColumns[]): Array<React.ReactElement> =>
 
 export default function BasicSelect({ columns, title, onChangeEvent }: IBasicSelectProps) {
   const [value, setValue] = React.useState("");
-  const handleChange = (fieldName: string, newValue: string) => {
+  const handleChange = (name: string, newValue: string) => {
     setValue(newValue);
-    onChangeEvent(fieldName, newValue);
+    onChangeEvent(name, newValue);
   };
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -53,7 +53,7 @@ export default function BasicSelect({ columns, title, onChangeEvent }: IBasicSel
               id={column.id}
               value={value}
               label={column.label}
-              onChange={e => handleChange(column.fieldName, e.target.value)}
+              onChange={e => handleChange(column.name, e.target.value)}
             >
               {renderOptions(column.options)}
             </Select>

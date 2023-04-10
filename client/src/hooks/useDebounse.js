@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { useCallback } from 'react';
+import { useRef } from "react";
+import { useCallback } from "react";
 
 export const useDebounse = (cb, delay) => {
   // создаю хук useDebounse

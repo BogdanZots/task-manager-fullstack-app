@@ -4,12 +4,11 @@ import TextField from "@mui/material/TextField";
 interface IInputItem {
   type: string;
   placeholder: string;
-  onChangeEvent: (fieldName: string, newValue: any) => void;
+  onChangeEvent: (name: string, newValue: any) => void;
   label?: string;
   className?: string;
   id?: string;
-  name?: string;
-  fieldName: string;
+  name: string;
   value?: any;
 }
 export default React.memo(function InputItem({
@@ -19,12 +18,13 @@ export default React.memo(function InputItem({
   label,
   className,
   name,
-  fieldName,
 }: IInputItem) {
   const [value, setValue] = useState("");
   const handleChange = (newValue: string) => {
-    setValue(newValue);
-    onChangeEvent(fieldName, newValue);
+    if (name) {
+      setValue(newValue);
+      onChangeEvent(name, newValue);
+    }
   };
   return (
     <TextField

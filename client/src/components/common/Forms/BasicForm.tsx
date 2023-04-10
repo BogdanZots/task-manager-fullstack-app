@@ -4,6 +4,7 @@ import { CREATE_ITEM_FORM, REGISTRATION_FORM } from "../../../const/consts";
 import { configsLength, registrationInputColumns, createItemColumns } from "../../../config/config";
 import { isItemEmpty } from "../../../helpres/isItemEmpty";
 import { CreateItemForm } from "./CreateItemForm";
+import { FormikCreateItemForm } from "./FormikCreateItemForm";
 import RegistrationForm from "./RegistrationForm";
 import { Box } from "@mui/material";
 
@@ -14,6 +15,7 @@ interface BasicFormProps {
   isVisible?: boolean;
   onClose?: () => void;
 }
+
 export default function BasicForm({ onSubmit, type, userId, onClose, isVisible }: BasicFormProps) {
   const [fields, setFields] = useState<{ [field: string]: any }>({});
   const [isFieldsEmpty, setIsEmpty] = useState(true);
@@ -35,25 +37,40 @@ export default function BasicForm({ onSubmit, type, userId, onClose, isVisible }
     }));
   };
 
-  const handleFromSubmit = (e: any) => {
+  const handleFromSubmit = () => {
     onSubmit(fields);
+
     onClose && onClose();
   };
 
   useDeepEffect(changeButtonState, [fields, isFieldsEmpty]);
 
+  const renderFormVariant = () => {
+    if (process.env.REACT_APP_FORMS_VARIANT === "external") {
+      return (
+        <FormikCreateItemForm
+          columns={createItemColumns}
+          onChange={handleConfigUpdate}
+          onSubmit={handleFromSubmit}
+        />
+      );
+    } else {
+      return (
+        <CreateItemForm
+          columns={createItemColumns}
+          onChange={handleConfigUpdate}
+          onSubmit={handleFromSubmit}
+          isButtonDisabled={buttonDisabled}
+        />
+      );
+    }
+  };
+
   const renderBasicForm = (type: string) => {
     if (!isVisible) return null;
     switch (type) {
       case CREATE_ITEM_FORM:
-        return (
-          <CreateItemForm
-            columns={createItemColumns}
-            onChange={handleConfigUpdate}
-            onSubmit={handleFromSubmit}
-            isButtonDisabled={buttonDisabled}
-          />
-        );
+        return <>{renderFormVariant()}</>;
       case REGISTRATION_FORM: {
         return (
           <RegistrationForm

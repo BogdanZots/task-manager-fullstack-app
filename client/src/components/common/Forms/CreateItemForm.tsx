@@ -1,10 +1,12 @@
+import React, { useCallback } from "react";
 import Button from "@mui/material/Button";
 import InputItem from "../Inputs/InputItem";
 import styled from "styled-components";
-
-const FormWrapper = styled("div")`
+import { checkFormikFields } from "../../../helpres/checkFormikFields";
+const FormWrapper = styled("form")`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const CreateItemForm = ({ onChange, onSubmit, isButtonDisabled, columns }: any) => {
@@ -12,22 +14,26 @@ export const CreateItemForm = ({ onChange, onSubmit, isButtonDisabled, columns }
     e.preventDefault();
     onSubmit();
   };
+
+  const handleInputChange = (name: string, newValue: string) => {
+    onChange(name, newValue);
+  };
+
   return (
-    <FormWrapper>
+    <FormWrapper onSubmit={handleFormSubmit}>
       {columns.map((column: any) => {
         return (
           <InputItem
             type={column.type}
             placeholder={column.description}
             value={column.value}
-            onChangeEvent={onChange}
+            onChangeEvent={handleInputChange}
             label={column.label}
             name={column.name}
-            fieldName={column.fieldName}
           />
         );
       })}
-      <Button disabled={isButtonDisabled} onClick={handleFormSubmit}>
+      <Button disabled={isButtonDisabled} type="submit">
         Save item
       </Button>
     </FormWrapper>

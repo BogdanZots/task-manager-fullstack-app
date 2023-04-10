@@ -14,14 +14,7 @@ import {
 function* userRegistation(action) {
   const { email, password, name, surname, role } = action.payload;
   try {
-    const response = yield call(
-      AuthService.registration,
-      email,
-      password,
-      name,
-      surname,
-      role
-    );
+    const response = yield call(AuthService.registration, email, password, name, surname, role);
     if (response?.data) {
       let accessToken = response.data.accessToken;
       localStorage.setItem("token", accessToken);

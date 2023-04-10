@@ -1,18 +1,9 @@
 import $api from "../http";
 import { AxiosResponse } from "axios";
 import { IAuthResponse } from "../models/response/AuthResponse";
-import {
-  CHECK_AUTH_URL,
-  LOGOUT_URL,
-  LOGIN_URL,
-  REGISTRATION_URL,
-  API_URL,
-} from "../const/consts";
+import { CHECK_AUTH_URL, LOGOUT_URL, LOGIN_URL, REGISTRATION_URL, API_URL } from "../const/consts";
 export default class AuthService {
-  static async login(
-    email: string,
-    password: string
-  ): Promise<AxiosResponse<IAuthResponse>> {
+  static async login(email: string, password: string): Promise<AxiosResponse<IAuthResponse>> {
     return $api.post<IAuthResponse>(`${API_URL}${LOGIN_URL}`, {
       email,
       password,
@@ -23,7 +14,7 @@ export default class AuthService {
     password: string,
     name: string,
     surname: string,
-    role: string
+    role: string,
   ): Promise<AxiosResponse<IAuthResponse>> {
     return $api.post<IAuthResponse>(`${API_URL}${REGISTRATION_URL}`, {
       email,

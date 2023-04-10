@@ -7,27 +7,27 @@ export const USER_CHECK_AUTH_SUCCESS = "USER_CHECK_AUTH_SUCCESS";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS";
 
-export const userRegistation = (data) => {
+export const userRegistation = data => {
   return {
     type: USER_RERISTRATION,
     payload: data,
   };
 };
 
-export const userRegistationSuccess = (data) => {
+export const userRegistationSuccess = data => {
   return {
     type: USER_RERISTRATION_SUCCESS,
     payload: data,
   };
 };
-export const userLogin = (data) => {
+export const userLogin = data => {
   return {
     type: USER_LOGIN,
     payload: data,
   };
 };
 
-export const userLoginSuccess = (data) => {
+export const userLoginSuccess = data => {
   return {
     type: USER_LOGIN_SUCCESS,
     payload: { isAuth: true, data },
@@ -50,7 +50,7 @@ export const userCheckAuth = () => {
   };
 };
 
-export const userCheckAuthSuccess = (data) => {
+export const userCheckAuthSuccess = data => {
   return {
     type: USER_CHECK_AUTH_SUCCESS,
     payload: data,

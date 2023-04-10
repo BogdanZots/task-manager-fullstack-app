@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { Box } from '@mui/material';
-import Reminds from '../../components/RemindsPage';
-import { useSelector, useDispatch } from 'react-redux';
-import { loadRemindsRequest } from '../../store/actions/remindsAction';
-import { getUser, getUserId } from '../../store/selectors/userSelector';
-import { getReminds } from '../../store/selectors/remindsSelector';
-import { removeRemindCard } from '../../store/actions/remindsAction';
+import React, { useEffect } from "react";
+import { Box } from "@mui/material";
+import Reminds from "../../components/RemindsPage";
+import { useSelector, useDispatch } from "react-redux";
+import { loadRemindsRequest } from "../../store/actions/remindsAction";
+import { getUser, getUserId } from "../../store/selectors/userSelector";
+import { getReminds } from "../../store/selectors/remindsSelector";
+import { removeRemindCard } from "../../store/actions/remindsAction";
 
 export default function RemindsPage() {
   const dispatch = useDispatch();
@@ -25,10 +25,10 @@ export default function RemindsPage() {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        marginTop: '92px',
-        width: '100%',
+        display: "flex",
+        flexDirection: "column",
+        marginTop: "92px",
+        width: "100%",
       }}
     >
       <Reminds remindsArray={reminds} onRemove={onRemove} />

@@ -10,7 +10,7 @@ describe("Select component testing", () => {
   const componentProps = {
     columns: [
       {
-        fieldName: "role",
+        name: "role",
         id: "demo-simple-select",
         label: "Select person role",
         labelId: "demo-simple-select-label",
@@ -38,7 +38,7 @@ describe("Select component testing", () => {
   });
   it("Should set Admin role when admin role was selected", () => {
     expect(selectArea.value).toBe(undefined);
-    selectArea.simulate("change", { target: { fieldName: "role", value: "Admin" } });
+    selectArea.simulate("change", { target: { name: "role", value: "Admin" } });
     selectArea = component.find("#demo-simple-select");
     expect(selectArea.prop("value")).toEqual("Admin");
   });

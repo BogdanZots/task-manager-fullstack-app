@@ -4,6 +4,6 @@ export interface ICreateItemColumns {
   id: string;
   placeholder: string;
   label: string;
-  fieldName: string;
+  name: string;
   length: number;
 }

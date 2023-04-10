@@ -12,8 +12,8 @@ const LoginForm = () => {
   //@ts-ignore
   let data: ILogin = {};
 
-  const handleChange = (fieldName: string, newValue: any) => {
-    data = { ...data, [fieldName]: newValue };
+  const handleChange = (name: string, newValue: any) => {
+    data = { ...data, [name]: newValue };
   };
   return (
     <main className="form-signin text-center d-flex justify-content-center mt-5 align-items-center col-12">
@@ -29,7 +29,7 @@ const LoginForm = () => {
                 id={column.id}
                 placeholder={column.placeholder}
                 label={column.label}
-                fieldName={column.fieldName}
+                name={column.name}
               />
             </div>
           );

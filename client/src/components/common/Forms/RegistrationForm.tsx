@@ -31,7 +31,7 @@ const RegistrationForm = ({ onChange, columns, onSubmit, isButtonDisabled }: any
             id={column.id}
             placeholder={column.placeholder}
             label={column.label}
-            fieldName={column.fieldName}
+            name={column.name}
           />
         );
       })}

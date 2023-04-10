@@ -18,7 +18,7 @@ export const addItemForm = [
     id: "floatingInput",
     placeholder: "name@example.com",
     label: "Enter title",
-    fieldName: "title",
+    name: "title",
   },
   {
     value: "",
@@ -28,7 +28,7 @@ export const addItemForm = [
     id: "floatingInput",
     placeholder: "your first name",
     label: "Enter description ",
-    fieldName: "description",
+    name: "description",
   },
 ];
 
@@ -80,7 +80,7 @@ export const registrationInputColumns = [
     id: "floatingInput",
     placeholder: "name@example.com",
     label: "enter your e-mail",
-    fieldName: "email",
+    name: "email",
   },
   {
     type: "text",
@@ -88,7 +88,7 @@ export const registrationInputColumns = [
     id: "floatingInput",
     placeholder: "your first name",
     label: "your first name",
-    fieldName: "name",
+    name: "name",
   },
   {
     type: "text",
@@ -96,7 +96,7 @@ export const registrationInputColumns = [
     id: "floatingInput",
     placeholder: "your last name",
     label: "your last name",
-    fieldName: "surname",
+    name: "surname",
   },
   {
     type: "password",
@@ -104,7 +104,7 @@ export const registrationInputColumns = [
     id: "floatingPassword",
     placeholder: "Password",
     label: "Password",
-    fieldName: "password",
+    name: "password",
   },
 ];
 export const loginInputColumns = [
@@ -114,7 +114,7 @@ export const loginInputColumns = [
     id: "floatingInput",
     placeholder: "name@example.com",
     label: "enter your e-mail",
-    fieldName: "email",
+    name: "email",
   },
   {
     type: "password",
@@ -122,7 +122,7 @@ export const loginInputColumns = [
     id: "floatingPassword",
     placeholder: "Password",
     label: "Password",
-    fieldName: "password",
+    name: "password",
   },
 ];
 
@@ -130,7 +130,7 @@ export const selectRoleColumns = [
   {
     labelId: "demo-simple-select-label",
     id: "demo-simple-select",
-    fieldName: "role",
+    name: "role",
     label: "Select person role",
     options: [
       {
@@ -148,20 +148,27 @@ export const createItemColumns = [
   {
     type: "text",
     className: "form-control",
-    id: "floatingInput",
+    id: "title",
     placeholder: "name@example.com",
     label: "Enter title",
-    fieldName: "title",
+    name: "title",
+    required: true,
   },
   {
     type: "text",
     className: "form-control",
-    id: "floatingInput",
+    id: "description",
     placeholder: "your first name",
     label: "Enter description ",
-    fieldName: "description",
+    name: "description",
+    required: true,
   },
 ];
+
+export const enum AvailableAppFields {
+  DESCRIPTION = "description",
+  TITLE = "title",
+}
 
 // TYPES
 

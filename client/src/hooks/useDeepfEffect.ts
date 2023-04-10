@@ -6,9 +6,7 @@ export const useDeepEffect = (effectRun: Function, deps: any): void => {
   const prevDeps = useRef(deps);
 
   useEffect(() => {
-    const isSame = prevDeps.current.every((item: any, i: any) =>
-      _isEqual(item, deps[i])
-    );
+    const isSame = prevDeps.current.every((item: any, i: any) => _isEqual(item, deps[i]));
     if (isFirst.current || !isSame) effectRun();
     isFirst.current = false;
     prevDeps.current = deps;
